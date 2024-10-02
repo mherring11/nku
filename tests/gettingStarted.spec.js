@@ -1,7 +1,7 @@
 const { test, expect } = require('@playwright/test');
 
 test.describe("Programs Section", () => {
-    test.setTimeout(120000); // Set test timeout to 120 seconds
+    test.setTimeout(60000); // Set test timeout to 60 seconds
 
     // Before each test, navigate to the NKU online degrees homepage
     test.beforeEach(async ({ page }) => {
