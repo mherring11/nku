@@ -1,4 +1,4 @@
-const { test, expect } = require('@playwright/test');
+const { test, expect } = require("@playwright/test");
 
 test.describe("Verify Form Elements", () => {
   test.setTimeout(30000); // Set timeout to 30 seconds
@@ -7,17 +7,24 @@ test.describe("Verify Form Elements", () => {
   test.beforeEach(async ({ page, context }) => {
     console.log("Clearing cache and cookies...");
     await context.clearCookies(); // Clears cookies
-    await page.goto('about:blank'); // Navigate to blank page to help clear cache
+    await page.goto("about:blank"); // Navigate to blank page to help clear cache
     await page.goto("https://onlinedegrees.nku.edu"); // Navigate to the NKU online degrees homepage
   });
 
   // Test to verify specific form element is visible and present
-  test("Verify specific form element is visible and present", async ({ page }) => {
+  test("Verify specific form element is visible and present", async ({
+    page,
+  }) => {
     console.log("Verifying form element is visible on the page...");
-    const formContainerSelector = '.elementor-element-91d0733'; // Updated selector for the form container
+    const formContainerSelector = ".elementor-element-91d0733"; // Updated selector for the form container
     try {
-      await page.waitForSelector(formContainerSelector, { state: 'visible', timeout: 60000 });
-      console.log("iframe loaded and name, email, phone, degree interest exist..");
+      await page.waitForSelector(formContainerSelector, {
+        state: "visible",
+        timeout: 60000,
+      });
+      console.log(
+        "iframe loaded and name, email, phone, degree interest exist.."
+      );
     } catch (e) {
       console.error("iframe did not load.");
       console.error(e);

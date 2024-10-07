@@ -524,29 +524,44 @@ test.describe("Programs Section", () => {
     // Step 4: Expand and verify Healthcare Certificate Programs
     console.log("Expanding 'Healthcare Certificate Programs'...");
     const healthcareCertSelector = "#mega-menu-item-6215 > a";
-    await page.waitForSelector(healthcareCertSelector, { state: "attached", timeout: 20000 });
+    await page.waitForSelector(healthcareCertSelector, {
+      state: "attached",
+      timeout: 20000,
+    });
     console.log("Scrolling to 'Healthcare Certificate Programs' link...");
     await page.locator(healthcareCertSelector).scrollIntoViewIfNeeded();
-    console.log("Waiting for 'Healthcare Certificate Programs' link to be visible...");
-    await page.waitForSelector(healthcareCertSelector, { state: "visible", timeout: 20000 });
-    console.log("Attempting to click 'Healthcare Certificate Programs' link...");
+    console.log(
+      "Waiting for 'Healthcare Certificate Programs' link to be visible..."
+    );
+    await page.waitForSelector(healthcareCertSelector, {
+      state: "visible",
+      timeout: 20000,
+    });
+    console.log(
+      "Attempting to click 'Healthcare Certificate Programs' link..."
+    );
     await page.click(healthcareCertSelector);
 
     // Verify Health Care Commercialization Certificate
-    console.log("Clicking and verifying 'Health Care Commercialization Certificate'...");
+    console.log(
+      "Clicking and verifying 'Health Care Commercialization Certificate'..."
+    );
     const healthcareCertLink = "#mega-menu-item-6203 > a";
     await page.waitForSelector(healthcareCertLink, { state: "visible" });
     await page.locator(healthcareCertLink).scrollIntoViewIfNeeded();
     await page.click(healthcareCertLink);
-    console.log("Verifying 'Health Care Commercialization Certificate' page URL...");
-    await expect(page).toHaveURL("https://onlinedegrees.nku.edu/programs/healthcare/commercialization-certificate/");
+    console.log(
+      "Verifying 'Health Care Commercialization Certificate' page URL..."
+    );
+    await expect(page).toHaveURL(
+      "https://onlinedegrees.nku.edu/programs/healthcare/commercialization-certificate/"
+    );
     await page.goBack();
 
     console.log("Re-clicking 'Online Programs' to re-expand it...");
-    await page.click('#mega-menu-item-6111 > a'); // Re-click Online Programs
+    await page.click("#mega-menu-item-6111 > a"); // Re-click Online Programs
     console.log("Re-clicking 'Certificate Programs'...");
-    await page.click('#mega-menu-item-6198 > a'); // Re-click Certificate Programs
-
+    await page.click("#mega-menu-item-6198 > a"); // Re-click Certificate Programs
 
     // Step 5: Expand and verify Informatics Certificate Programs
     console.log("Expanding 'Informatics Certificate Programs'...");
