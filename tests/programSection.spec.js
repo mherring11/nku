@@ -5,7 +5,7 @@ test.describe("Programs Section", () => {
 
   // Before each test, navigate to the NKU online degrees homepage
   test.beforeEach(async ({ page }) => {
-    await page.goto("https://onlinedegrees.nku.edu");
+    await page.goto("https://dev-risepoint-nku.pantheonsite.io/");
   });
 
   test("Verify program links navigate correctly", async ({ page }) => {
@@ -23,7 +23,7 @@ test.describe("Programs Section", () => {
     await page.click(generalBusinessLink);
     console.log("Verifying 'General Business' page...");
     await expect(page).toHaveURL(
-      "https://onlinedegrees.nku.edu/programs/undergraduate/bsba/general-business/"
+      "https://dev-risepoint-nku.pantheonsite.io/programs/undergraduate/bsba/general-business/"
     );
     await page.goBack();
     console.log("Navigating back to 'Online Programs'...");
@@ -35,7 +35,7 @@ test.describe("Programs Section", () => {
     await page.click(salesLink);
     console.log("Verifying 'Sales' page...");
     await expect(page).toHaveURL(
-      "https://onlinedegrees.nku.edu/programs/undergraduate/bsba/sales/"
+      "https://dev-risepoint-nku.pantheonsite.io/programs/undergraduate/bsba/sales/"
     );
     await page.goBack();
     await page.click(onlineProgramsSelector);
@@ -46,7 +46,7 @@ test.describe("Programs Section", () => {
     await page.click(globalSupplyChainLink);
     console.log("Verifying 'Global Supply Chain Management' page...");
     await expect(page).toHaveURL(
-      "https://onlinedegrees.nku.edu/programs/undergraduate/bsba/global-supply-chain-management/"
+      "https://dev-risepoint-nku.pantheonsite.io/programs/undergraduate/bsba/global-supply-chain-management/"
     );
     await page.goBack();
     await page.click(onlineProgramsSelector);
@@ -57,7 +57,7 @@ test.describe("Programs Section", () => {
     await page.click(hrManagementLink);
     console.log("Verifying 'HR Management' page...");
     await expect(page).toHaveURL(
-      "https://onlinedegrees.nku.edu/programs/undergraduate/bsba/hr-management/"
+      "https://dev-risepoint-nku.pantheonsite.io/programs/undergraduate/bsba/hr-management/"
     );
     await page.goBack();
     await page.click(onlineProgramsSelector);
@@ -68,7 +68,7 @@ test.describe("Programs Section", () => {
     await page.click(managementLink);
     console.log("Verifying 'Management' page...");
     // await expect(page).toHaveURL(
-    //   "https://onlinedegrees.nku.edu/programs/undergraduate/bsba/management/"
+    //   "https://dev-risepoint-nku.pantheonsite.io/programs/undergraduate/bsba/management/"
     // );
     await page.goBack();
     await page.click(onlineProgramsSelector);
@@ -79,7 +79,7 @@ test.describe("Programs Section", () => {
     await page.click(marketingLink);
     console.log("Verifying 'Marketing' page...");
     // await expect(page).toHaveURL(
-    //   "https://onlinedegrees.nku.edu/programs/undergraduate/bsba/marketing/"
+    //   "https://dev-risepoint-nku.pantheonsite.io/programs/undergraduate/bsba/marketing/"
     // );
 
     // Check if "Apply Now" button works for the Marketing page
@@ -101,7 +101,7 @@ test.describe("Programs Section", () => {
     await page.click(criminalJusticeProgramLink);
     console.log("Verifying 'Criminal Justice' page...");
     await expect(page).toHaveURL(
-      "https://onlinedegrees.nku.edu/programs/undergraduate/arts-and-sciences/bachelor-of-arts-criminal-justice/"
+      "https://dev-risepoint-nku.pantheonsite.io/programs/undergraduate/arts-and-sciences/bachelor-of-arts-criminal-justice/"
     );
     await page.goBack();
     await page.click(onlineProgramsSelector);
@@ -115,7 +115,7 @@ test.describe("Programs Section", () => {
     await page.click(respiratoryCareLink);
     console.log("Verifying 'Respiratory Care' page...");
     await expect(page).toHaveURL(
-      "https://onlinedegrees.nku.edu/programs/undergraduate/health-and-human-services/bsrc/"
+      "https://dev-risepoint-nku.pantheonsite.io/programs/undergraduate/health-and-human-services/bsrc/"
     );
     await page.goBack();
     await page.click(onlineProgramsSelector);
@@ -132,7 +132,7 @@ test.describe("Programs Section", () => {
     await page.click(communicationStudiesLink);
     console.log("Verifying 'Communication Studies' page...");
     await expect(page).toHaveURL(
-      "https://onlinedegrees.nku.edu/programs/undergraduate/bachelor-of-arts-communication-studies/"
+      "https://dev-risepoint-nku.pantheonsite.io/programs/undergraduate/bachelor-of-arts-communication-studies/"
     );
     await page.goBack();
     await page.click(onlineProgramsSelector);
@@ -145,7 +145,7 @@ test.describe("Programs Section", () => {
     await page.click(historyLink);
     console.log("Verifying 'History' page...");
     await expect(page).toHaveURL(
-      "https://onlinedegrees.nku.edu/programs/undergraduate/arts-and-sciences/bachelor-of-arts-history/"
+      "https://dev-risepoint-nku.pantheonsite.io/programs/undergraduate/arts-and-sciences/bachelor-of-arts-history/"
     );
     await page.goBack();
     await page.click(onlineProgramsSelector);
@@ -159,7 +159,7 @@ test.describe("Programs Section", () => {
     await page.click(rnToBsnLink);
     console.log("Verifying 'RN to BSN' page...");
     await expect(page).toHaveURL(
-      "https://onlinedegrees.nku.edu/programs/healthcare/rn-to-bsn/"
+      "https://dev-risepoint-nku.pantheonsite.io/programs/healthcare/rn-to-bsn/"
     );
     await page.goBack();
     await page.click(onlineProgramsSelector);
@@ -177,7 +177,7 @@ test.describe("Programs Section", () => {
     await page.click(itGeneralLink);
     console.log("Verifying 'IT General' page...");
     await expect(page).toHaveURL(
-      "https://onlinedegrees.nku.edu/programs/undergraduate/bachelor-information-technology/general/"
+      "https://dev-risepoint-nku.pantheonsite.io/programs/undergraduate/bachelor-information-technology/general/"
     );
     await page.goBack();
 
@@ -193,7 +193,7 @@ test.describe("Programs Section", () => {
     await page.click(cloudSystemAdminLink);
     console.log("Verifying 'Cloud System Administration' page...");
     await expect(page).toHaveURL(
-      "https://onlinedegrees.nku.edu/programs/undergraduate/bachelor-information-technology/cloud-system-administration/"
+      "https://dev-risepoint-nku.pantheonsite.io/programs/undergraduate/bachelor-information-technology/cloud-system-administration/"
     );
     await page.goBack();
 
@@ -210,7 +210,7 @@ test.describe("Programs Section", () => {
     await page.click(dataAnalyticsLink);
     console.log("Verifying 'Data Analytics' page...");
     await expect(page).toHaveURL(
-      "https://onlinedegrees.nku.edu/programs/business/macc/data-analytics-visualization/"
+      "https://dev-risepoint-nku.pantheonsite.io/programs/business/macc/data-analytics-visualization/"
     );
     await page.goBack();
     await page.click(onlineProgramsSelector);
@@ -221,7 +221,7 @@ test.describe("Programs Section", () => {
     await page.click(professionalTrackLink);
     console.log("Verifying 'Professional Track' page...");
     await expect(page).toHaveURL(
-      "https://onlinedegrees.nku.edu/programs/business/macc/professional-track/"
+      "https://dev-risepoint-nku.pantheonsite.io/programs/business/macc/professional-track/"
     );
     await page.goBack();
     await page.click(onlineProgramsSelector);
@@ -232,7 +232,7 @@ test.describe("Programs Section", () => {
     await page.click(businessAnalyticsLink);
     console.log("Verifying 'Business Analytics' page...");
     await expect(page).toHaveURL(
-      "https://onlinedegrees.nku.edu/programs/business/informatics/mbi-business-analytics/"
+      "https://dev-risepoint-nku.pantheonsite.io/programs/business/informatics/mbi-business-analytics/"
     );
     await page.goBack();
     await page.click(onlineProgramsSelector);
@@ -243,7 +243,7 @@ test.describe("Programs Section", () => {
     await page.click(securityManagementLink);
     console.log("Verifying 'Security Management' page...");
     await expect(page).toHaveURL(
-      "https://onlinedegrees.nku.edu/programs/business/informatics/mbi-security-management/"
+      "https://dev-risepoint-nku.pantheonsite.io/programs/business/informatics/mbi-security-management/"
     );
     await page.goBack();
     await page.click(onlineProgramsSelector);
@@ -254,7 +254,7 @@ test.describe("Programs Section", () => {
     await page.click(healthcareInformaticsLink);
     console.log("Verifying 'Healthcare Informatics' page...");
     await expect(page).toHaveURL(
-      "https://onlinedegrees.nku.edu/programs/business/informatics/mbi-healthcare/"
+      "https://dev-risepoint-nku.pantheonsite.io/programs/business/informatics/mbi-healthcare/"
     );
     await page.goBack();
     await page.click(onlineProgramsSelector);
@@ -265,7 +265,7 @@ test.describe("Programs Section", () => {
     await page.click(mbaLink);
     console.log("Verifying 'MBA' page...");
     await expect(page).toHaveURL(
-      "https://onlinedegrees.nku.edu/programs/business/mba/"
+      "https://dev-risepoint-nku.pantheonsite.io/programs/business/mba/"
     );
     await page.goBack();
     await page.click(onlineProgramsSelector);
@@ -283,7 +283,7 @@ test.describe("Programs Section", () => {
     await page.click(autismEducationLink);
     console.log("Verifying 'Autism Education' page...");
     await expect(page).toHaveURL(
-      "https://onlinedegrees.nku.edu/programs/education/maed-teacher-leader/autism/"
+      "https://dev-risepoint-nku.pantheonsite.io/programs/education/maed-teacher-leader/autism/"
     );
     await page.goBack();
     await page.click(onlineProgramsSelector);
@@ -295,7 +295,7 @@ test.describe("Programs Section", () => {
     await page.click(curriculumInstructionLink);
     console.log("Verifying 'Curriculum Instruction' page...");
     await expect(page).toHaveURL(
-      "https://onlinedegrees.nku.edu/programs/education/maed-teacher-leader/curriculum-instruction/"
+      "https://dev-risepoint-nku.pantheonsite.io/programs/education/maed-teacher-leader/curriculum-instruction/"
     );
     await page.goBack();
     await page.click(onlineProgramsSelector);
@@ -310,7 +310,7 @@ test.describe("Programs Section", () => {
     await page.click(healthAdminLink);
     console.log("Verifying 'Health Administration' page...");
     await expect(page).toHaveURL(
-      "https://onlinedegrees.nku.edu/programs/healthcare/master-of-science-health-administration/"
+      "https://dev-risepoint-nku.pantheonsite.io/programs/healthcare/master-of-science-health-administration/"
     );
     await page.goBack();
     await page.click(onlineProgramsSelector);
@@ -322,7 +322,7 @@ test.describe("Programs Section", () => {
     await page.click(healthInformaticsLink);
     console.log("Verifying 'Health Informatics' page...");
     await expect(page).toHaveURL(
-      "https://onlinedegrees.nku.edu/programs/business/informatics/mshi/"
+      "https://dev-risepoint-nku.pantheonsite.io/programs/business/informatics/mshi/"
     );
     await page.goBack();
     await page.click(onlineProgramsSelector);
@@ -337,7 +337,7 @@ test.describe("Programs Section", () => {
     await page.click(businessAnalyticsInformaticsLink);
     console.log("Verifying 'Business Analytics Informatics' page...");
     await expect(page).toHaveURL(
-      "https://onlinedegrees.nku.edu/programs/business/informatics/mbi-business-analytics/"
+      "https://dev-risepoint-nku.pantheonsite.io/programs/business/informatics/mbi-business-analytics/"
     );
     await page.goBack();
     await page.click(onlineProgramsSelector);
@@ -349,7 +349,7 @@ test.describe("Programs Section", () => {
     await page.click(healthcareInformaticsLinkInformatics);
     console.log("Verifying 'Healthcare Informatics (Informatics)' page...");
     await expect(page).toHaveURL(
-      "https://onlinedegrees.nku.edu/programs/business/informatics/mbi-healthcare/"
+      "https://dev-risepoint-nku.pantheonsite.io/programs/business/informatics/mbi-healthcare/"
     );
     await page.goBack();
     await page.click(onlineProgramsSelector);
@@ -364,7 +364,7 @@ test.describe("Programs Section", () => {
     await page.click(legalStudiesLink);
     console.log("Verifying 'Legal Studies' page...");
     await expect(page).toHaveURL(
-      "https://onlinedegrees.nku.edu/programs/business/master-legal-studies-digital-law-and-technology/"
+      "https://dev-risepoint-nku.pantheonsite.io/programs/business/master-legal-studies-digital-law-and-technology/"
     );
     await page.goBack();
     await page.click(onlineProgramsSelector);
@@ -379,7 +379,7 @@ test.describe("Programs Section", () => {
     await page.click(nursingCareLink);
     console.log("Verifying 'Nursing Care' page...");
     await expect(page).toHaveURL(
-      "https://onlinedegrees.nku.edu/programs/healthcare/msn/agacnp/"
+      "https://dev-risepoint-nku.pantheonsite.io/programs/healthcare/msn/agacnp/"
     );
     await page.goBack();
     await page.click(onlineProgramsSelector);
@@ -391,7 +391,7 @@ test.describe("Programs Section", () => {
     await page.click(familyNursePractitionerLink);
     console.log("Verifying 'Family Nurse Practitioner' page...");
     await expect(page).toHaveURL(
-      "https://onlinedegrees.nku.edu/programs/healthcare/msn/fnp/"
+      "https://dev-risepoint-nku.pantheonsite.io/programs/healthcare/msn/fnp/"
     );
     await page.goBack();
     await page.click(onlineProgramsSelector);
@@ -406,7 +406,7 @@ test.describe("Programs Section", () => {
     await page.click(cybersecurityLink);
     console.log("Verifying 'Cybersecurity' page...");
     await expect(page).toHaveURL(
-      "https://onlinedegrees.nku.edu/programs/technology/ms-cybersecurity/"
+      "https://dev-risepoint-nku.pantheonsite.io/programs/technology/ms-cybersecurity/"
     );
     await page.goBack();
     await page.click(onlineProgramsSelector);
@@ -433,7 +433,7 @@ test.describe("Programs Section", () => {
     await page.click(doctorEducationLink);
     console.log("Verifying 'Doctor of Education' page URL...");
     await expect(page).toHaveURL(
-      "https://onlinedegrees.nku.edu/programs/education/edd-educational-leadership/"
+      "https://dev-risepoint-nku.pantheonsite.io/programs/education/edd-educational-leadership/"
     );
     await page.goBack();
 
@@ -457,7 +457,7 @@ test.describe("Programs Section", () => {
       "Verifying 'Post-Master’s Doctor of Nursing Practice' page URL..."
     );
     await expect(page).toHaveURL(
-      "https://onlinedegrees.nku.edu/programs/healthcare/post-masters-dnp/"
+      "https://dev-risepoint-nku.pantheonsite.io/programs/healthcare/post-masters-dnp/"
     );
     await page.goBack();
 
@@ -486,7 +486,7 @@ test.describe("Programs Section", () => {
     await page.click(businessAnalyticsCertLink);
     console.log("Verifying 'Business Analytics Certificate' page URL...");
     await expect(page).toHaveURL(
-      "https://onlinedegrees.nku.edu/programs/business/informatics/graduate-analytics-certificate/"
+      "https://dev-risepoint-nku.pantheonsite.io/programs/business/informatics/graduate-analytics-certificate/"
     );
     await page.goBack();
 
@@ -512,7 +512,7 @@ test.describe("Programs Section", () => {
       "Verifying 'Cybersecurity: Fundamentals in the Cloud Certificate' page URL..."
     );
     await expect(page).toHaveURL(
-      "https://onlinedegrees.nku.edu/programs/technology/cybersecurity-fundamentals-in-cloud-certificate/"
+      "https://dev-risepoint-nku.pantheonsite.io/programs/technology/cybersecurity-fundamentals-in-cloud-certificate/"
     );
     await page.goBack();
 
@@ -554,7 +554,7 @@ test.describe("Programs Section", () => {
       "Verifying 'Health Care Commercialization Certificate' page URL..."
     );
     await expect(page).toHaveURL(
-      "https://onlinedegrees.nku.edu/programs/healthcare/commercialization-certificate/"
+      "https://dev-risepoint-nku.pantheonsite.io/programs/healthcare/commercialization-certificate/"
     );
     await page.goBack();
 
@@ -578,7 +578,7 @@ test.describe("Programs Section", () => {
       "Verifying 'Informatics Business Analytics Certificate' page URL..."
     );
     await expect(page).toHaveURL(
-      "https://onlinedegrees.nku.edu/programs/business/informatics/graduate-analytics-certificate/"
+      "https://dev-risepoint-nku.pantheonsite.io/programs/business/informatics/graduate-analytics-certificate/"
     );
     await page.goBack();
 
@@ -602,7 +602,7 @@ test.describe("Programs Section", () => {
       "Verifying 'Nurse Practitioner to Psych-Mental Health Nurse Practitioner Certificate' page URL..."
     );
     await expect(page).toHaveURL(
-      "https://onlinedegrees.nku.edu/programs/healthcare/nursing-certificates/np-to-pmhnp/"
+      "https://dev-risepoint-nku.pantheonsite.io/programs/healthcare/nursing-certificates/np-to-pmhnp/"
     );
     await page.goBack();
 
