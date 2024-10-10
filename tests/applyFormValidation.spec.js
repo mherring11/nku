@@ -8,7 +8,7 @@ test.describe("Apply Form Validation", () => {
     console.log("Clearing cache and cookies...");
     await context.clearCookies(); // Clears cookies
     await page.goto("about:blank"); // Navigate to blank page to help clear cache
-    await page.goto("https://onlinedegrees.nku.edu"); // Navigate to the NKU online degrees homepage
+    await page.goto("https://dev-risepoint-nku.pantheonsite.io/"); // Navigate to the NKU online degrees homepage
   });
 
   // Test to verify 'Apply Now' button redirects to the apply form
@@ -20,7 +20,7 @@ test.describe("Apply Form Validation", () => {
     await page.click(applyNowSelector);
 
     console.log("Verifying 'Apply Now' page URL...");
-    await expect(page).toHaveURL("https://onlinedegrees.nku.edu/apply/");
+    await expect(page).toHaveURL("https://dev-risepoint-nku.pantheonsite.io/apply/"); // Updated URL
     console.log("'Apply Now' page loaded successfully.");
   });
 
@@ -33,7 +33,7 @@ test.describe("Apply Form Validation", () => {
     await page.click(applyNowSelector);
 
     console.log("Verifying 'Apply Now' page URL...");
-    await expect(page).toHaveURL("https://onlinedegrees.nku.edu/apply/");
+    await expect(page).toHaveURL("https://dev-risepoint-nku.pantheonsite.io/apply/"); // Updated URL
     console.log("'Apply Now' page loaded successfully.");
 
     // Fill in the 'Program of Interest' dropdown to ensure the form is loaded properly
