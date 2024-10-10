@@ -5,7 +5,7 @@ test.describe("Resources Section", () => {
 
   // Before each test, navigate to the NKU online degrees homepage
   test.beforeEach(async ({ page }) => {
-    await page.goto("https://onlinedegrees.nku.edu");
+    await page.goto("https://dev-risepoint-nku.pantheonsite.io/");
   });
 
   test("Verify Resources section links navigate correctly", async ({
@@ -21,7 +21,7 @@ test.describe("Resources Section", () => {
     const aboutLink = "#mega-menu-item-6236 > a";
     await page.click(aboutLink);
     console.log("Verifying 'About' page URL...");
-    await expect(page).toHaveURL("https://onlinedegrees.nku.edu/about/");
+    await expect(page).toHaveURL("https://dev-risepoint-nku.pantheonsite.io/about/");
     await page.goBack();
     await page.click(resourcesSelector); // Re-click Resources to expand again
 
@@ -31,7 +31,7 @@ test.describe("Resources Section", () => {
     await page.click(accreditationsLink);
     console.log("Verifying 'Accreditations & Accolades' page URL...");
     await expect(page).toHaveURL(
-      "https://onlinedegrees.nku.edu/accreditations-accolades/"
+      "https://dev-risepoint-nku.pantheonsite.io/accreditations-accolades/"
     );
     await page.goBack();
     await page.click(resourcesSelector); // Re-click Resources to expand again
@@ -42,7 +42,7 @@ test.describe("Resources Section", () => {
     await page.click(financialAidLink);
     console.log("Verifying 'Financial Aid' page URL...");
     await expect(page).toHaveURL(
-      "https://onlinedegrees.nku.edu/financial-aid/"
+      "https://dev-risepoint-nku.pantheonsite.io/financial-aid/"
     );
 
     // Step 5: Test 'Contact our staff' link by looking for its text
@@ -81,7 +81,7 @@ test.describe("Resources Section", () => {
     const militaryLink = "#mega-menu-item-6240 > a";
     await page.click(militaryLink);
     console.log("Verifying 'Military & Veterans Resources' page URL...");
-    await expect(page).toHaveURL("https://onlinedegrees.nku.edu/military/");
+    await expect(page).toHaveURL("https://dev-risepoint-nku.pantheonsite.io/military/");
     await page.goBack();
     await page.click(resourcesSelector); // Re-click Resources to expand again
 
@@ -91,7 +91,7 @@ test.describe("Resources Section", () => {
     await page.click(studentServicesLink);
     console.log("Verifying 'Student Services' page URL...");
     await expect(page).toHaveURL(
-      "https://onlinedegrees.nku.edu/student-services/"
+      "https://dev-risepoint-nku.pantheonsite.io/student-services/"
     );
     await page.goBack();
     await page.click(resourcesSelector); // Re-click Resources to expand again
@@ -101,7 +101,7 @@ test.describe("Resources Section", () => {
     const articlesLink = "#mega-menu-item-9136 > a";
     await page.click(articlesLink);
     console.log("Verifying 'Articles' page URL...");
-    await expect(page).toHaveURL("https://onlinedegrees.nku.edu/articles/");
+    await expect(page).toHaveURL("https://dev-risepoint-nku.pantheonsite.io/articles/");
     await page.goBack();
     await page.click(resourcesSelector); // Re-click Resources to expand again
 
@@ -110,7 +110,7 @@ test.describe("Resources Section", () => {
     const faqsLink = "#mega-menu-item-6238 > a";
     await page.click(faqsLink);
     console.log("Verifying 'FAQs' page URL...");
-    await expect(page).toHaveURL("https://onlinedegrees.nku.edu/faqs/");
+    await expect(page).toHaveURL("https://dev-risepoint-nku.pantheonsite.io/faqs/");
     await page.goBack();
     await page.click(resourcesSelector); // Re-click Resources to expand again
 
@@ -119,7 +119,7 @@ test.describe("Resources Section", () => {
     const facultyLink = "#mega-menu-item-9135 > a";
     await page.click(facultyLink);
     console.log("Verifying 'Faculty' page URL...");
-    await expect(page).toHaveURL("https://onlinedegrees.nku.edu/faculty/");
+    await expect(page).toHaveURL("https://dev-risepoint-nku.pantheonsite.io/faculty/");
     await page.goBack();
   });
 });
