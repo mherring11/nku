@@ -11,7 +11,7 @@ test.describe("Program Navigation", () => {
         name: "Business Programs",
         linkSelector:
           "a[href='/programs/business/'] h3:has-text('Business Programs')",
-        expectedURL: "https://onlinedegrees.nku.edu/programs/business/",
+        expectedURL: "https://dev-risepoint-nku.pantheonsite.io/programs/business/",
         courseCatalogSelector:
           "section.elementor-section[data-id='71caa73'] .program-card-container",
       },
@@ -19,7 +19,7 @@ test.describe("Program Navigation", () => {
         name: "Education Programs",
         linkSelector:
           "a[href='/programs/education/'] h3:has-text('Education Programs')",
-        expectedURL: "https://onlinedegrees.nku.edu/programs/education/",
+        expectedURL: "https://dev-risepoint-nku.pantheonsite.io/programs/education/",
         courseCatalogSelector:
           "section.elementor-section[data-id='9013ff8'] .program-card-container",
       },
@@ -27,7 +27,7 @@ test.describe("Program Navigation", () => {
         name: "Healthcare Programs",
         linkSelector:
           "a[href='/programs/healthcare/'] h3:has-text('Healthcare Programs')",
-        expectedURL: "https://onlinedegrees.nku.edu/programs/healthcare/",
+        expectedURL: "https://dev-risepoint-nku.pantheonsite.io/programs/healthcare/",
         courseCatalogSelector:
           "section.elementor-section[data-id='4c79b726'] .program-card-container",
       },
@@ -36,7 +36,7 @@ test.describe("Program Navigation", () => {
         linkSelector:
           "a[href='/programs/business/informatics/'] h3:has-text('Informatics Programs')",
         expectedURL:
-          "https://onlinedegrees.nku.edu/programs/business/informatics/",
+          "https://dev-risepoint-nku.pantheonsite.io/programs/business/informatics/",
         courseCatalogSelector:
           "section.elementor-section[data-id='483270a'] .program-card-container",
       },
@@ -45,13 +45,13 @@ test.describe("Program Navigation", () => {
         linkSelector:
           "a[href='/programs/business/master-legal-studies-digital-law-and-technology/'] h3:has-text('Legal Programs')",
         expectedURL:
-          "https://onlinedegrees.nku.edu/programs/business/master-legal-studies-digital-law-and-technology/",
+          "https://dev-risepoint-nku.pantheonsite.io/programs/business/master-legal-studies-digital-law-and-technology/",
       },
       {
         name: "Nursing Programs",
         linkSelector:
           "a[href='/programs/healthcare/'] h3:has-text('Nursing Programs')",
-        expectedURL: "https://onlinedegrees.nku.edu/programs/healthcare/",
+        expectedURL: "https://dev-risepoint-nku.pantheonsite.io/programs/healthcare/",
         courseCatalogSelector:
           "section.elementor-section[data-id='4c79b726'] .program-card-container",
       },
@@ -59,7 +59,7 @@ test.describe("Program Navigation", () => {
         name: "Technology Programs",
         linkSelector:
           "a[href='/programs/technology/'] h3:has-text('Technology Programs')",
-        expectedURL: "https://onlinedegrees.nku.edu/programs/technology/",
+        expectedURL: "https://dev-risepoint-nku.pantheonsite.io/programs/technology/",
         courseCatalogSelector:
           "section.elementor-section[data-id='5a53ab69'] .program-card-container",
       },
@@ -67,14 +67,14 @@ test.describe("Program Navigation", () => {
         name: "Undergraduate Programs",
         linkSelector:
           "a[href='/programs/undergraduate/'] h3:has-text('Undergraduate Programs')",
-        expectedURL: "https://onlinedegrees.nku.edu/programs/undergraduate/",
+        expectedURL: "https://dev-risepoint-nku.pantheonsite.io/programs/undergraduate/",
         courseCatalogSelector:
           "section.elementor-section[data-id='7022c8c8'] .program-card-container",
       },
     ];
 
     // Navigate to the homepage
-    await page.goto("https://onlinedegrees.nku.edu");
+    await page.goto("https://dev-risepoint-nku.pantheonsite.io/");
 
     // Iterate through each program link and verify navigation and course catalog
     for (const program of programLinks) {
@@ -126,7 +126,7 @@ test.describe("Program Navigation", () => {
     page,
   }) => {
     // Navigate to the homepage
-    await page.goto("https://onlinedegrees.nku.edu");
+    await page.goto("https://dev-risepoint-nku.pantheonsite.io/");
 
     // Define the selector for the 'View Programs' button
     const viewProgramsButtonSelector =
@@ -147,7 +147,7 @@ test.describe("Program Navigation", () => {
       "Verifying that the page navigates to the program detail page..."
     );
     // Verify that the page URL matches the expected URL for the programs page
-    await expect(page).toHaveURL("https://onlinedegrees.nku.edu/programs/");
+    await expect(page).toHaveURL("https://dev-risepoint-nku.pantheonsite.io/programs/");
   });
 
   // Test to verify "View Programs" button functionality for Business, Education, Healthcare, Nursing, Legal, and Technology Programs
@@ -155,7 +155,7 @@ test.describe("Program Navigation", () => {
     page,
   }) => {
     // Navigate to the homepage
-    await page.goto("https://onlinedegrees.nku.edu");
+    await page.goto("https://dev-risepoint-nku.pantheonsite.io/");
 
     // Define the selector for the 'View Programs' button
     const viewProgramsButtonSelector =
@@ -176,7 +176,7 @@ test.describe("Program Navigation", () => {
       "Verifying that the page navigates to the program detail page..."
     );
     // Verify that the page URL matches the expected URL for the programs page
-    await expect(page).toHaveURL("https://onlinedegrees.nku.edu/programs/");
+    await expect(page).toHaveURL("https://dev-risepoint-nku.pantheonsite.io/programs/");
 
     // Helper function to check if a tab is collapsed or expanded, and click if collapsed
     async function toggleSectionIfCollapsed(sectionText) {
@@ -438,7 +438,7 @@ test.describe("Program Navigation", () => {
   page,
 }) => {
   // Navigate to the homepage
-  await page.goto("https://onlinedegrees.nku.edu");
+  await page.goto("https://dev-risepoint-nku.pantheonsite.io/");
 
   // Define the selector for the 'Request Info' button in the footer
   const requestInfoButtonSelector =
