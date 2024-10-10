@@ -8,7 +8,7 @@ test.describe("Verify Form Elements", () => {
     console.log("Clearing cache and cookies...");
     await context.clearCookies(); // Clears cookies
     await page.goto("about:blank"); // Navigate to blank page to help clear cache
-    await page.goto("https://onlinedegrees.nku.edu"); // Navigate to the NKU online degrees homepage
+    await page.goto("https://dev-risepoint-nku.pantheonsite.io/"); // Navigate to the NKU online degrees homepage
   });
 
   // Test to verify specific form element is visible and present
