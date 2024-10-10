@@ -5,7 +5,7 @@ test.describe("Programs Section", () => {
 
   // Before each test, navigate to the NKU online degrees homepage
   test.beforeEach(async ({ page }) => {
-    await page.goto("https://onlinedegrees.nku.edu");
+    await page.goto("https://dev-risepoint-nku.pantheonsite.io/");
   });
 
   test("Verify Getting Started section links navigate correctly", async ({
@@ -23,7 +23,7 @@ test.describe("Programs Section", () => {
     console.log("Clicking on 'Admissions' link...");
     await page.click(admissionsLink);
     console.log("Verifying 'Admissions' page URL...");
-    await expect(page).toHaveURL("https://onlinedegrees.nku.edu/admissions/");
+    await expect(page).toHaveURL("https://dev-risepoint-nku.pantheonsite.io/admissions/");
     console.log("Navigation to 'Admissions' page verified successfully.");
     await page.goBack();
     await page.click(gettingStartedSelector); // Re-click Getting Started to expand it again
@@ -35,7 +35,7 @@ test.describe("Programs Section", () => {
     console.log("Clicking on 'Tuition' link...");
     await page.click(tuitionLink);
     console.log("Verifying 'Tuition' page URL...");
-    await expect(page).toHaveURL("https://onlinedegrees.nku.edu/tuition/");
+    await expect(page).toHaveURL("https://dev-risepoint-nku.pantheonsite.io/tuition/");
     console.log("Navigation to 'Tuition' page verified successfully.");
     await page.goBack();
     await page.click(gettingStartedSelector); // Re-click Getting Started to expand it again
@@ -47,7 +47,7 @@ test.describe("Programs Section", () => {
     console.log("Clicking on 'Calendar' link...");
     await page.click(calendarLink);
     console.log("Verifying 'Calendar' page URL...");
-    await expect(page).toHaveURL("https://onlinedegrees.nku.edu/calendar/");
+    await expect(page).toHaveURL("https://dev-risepoint-nku.pantheonsite.io/calendar/");
     console.log("Navigation to 'Calendar' page verified successfully.");
     await page.goBack();
     await page.click(gettingStartedSelector); // Re-click Getting Started to expand it again
@@ -59,7 +59,7 @@ test.describe("Programs Section", () => {
     console.log("Clicking on 'Map' link...");
     await page.click(mapLink);
     console.log("Verifying 'Map' page URL...");
-    await expect(page).toHaveURL("https://onlinedegrees.nku.edu/map/");
+    await expect(page).toHaveURL("https://dev-risepoint-nku.pantheonsite.io/map/");
     console.log("Navigation to 'Map' page verified successfully.");
     await page.goBack();
   });
