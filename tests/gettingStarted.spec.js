@@ -1,7 +1,7 @@
 const { test, expect } = require("@playwright/test");
 
 test.describe("Programs Section", () => {
-  test.setTimeout(60000); // Set test timeout to 60 seconds
+  test.setTimeout(30000); // Set test timeout to 30 seconds
 
   // Before each test, navigate to the NKU online degrees homepage
   test.beforeEach(async ({ page }) => {
@@ -23,7 +23,9 @@ test.describe("Programs Section", () => {
     console.log("Clicking on 'Admissions' link...");
     await page.click(admissionsLink);
     console.log("Verifying 'Admissions' page URL...");
-    await expect(page).toHaveURL("https://dev-risepoint-nku.pantheonsite.io/admissions/");
+    await expect(page).toHaveURL(
+      "https://dev-risepoint-nku.pantheonsite.io/admissions/"
+    );
     console.log("Navigation to 'Admissions' page verified successfully.");
     await page.goBack();
     await page.click(gettingStartedSelector); // Re-click Getting Started to expand it again
@@ -35,7 +37,9 @@ test.describe("Programs Section", () => {
     console.log("Clicking on 'Tuition' link...");
     await page.click(tuitionLink);
     console.log("Verifying 'Tuition' page URL...");
-    await expect(page).toHaveURL("https://dev-risepoint-nku.pantheonsite.io/tuition/");
+    await expect(page).toHaveURL(
+      "https://dev-risepoint-nku.pantheonsite.io/tuition/"
+    );
     console.log("Navigation to 'Tuition' page verified successfully.");
     await page.goBack();
     await page.click(gettingStartedSelector); // Re-click Getting Started to expand it again
@@ -47,7 +51,9 @@ test.describe("Programs Section", () => {
     console.log("Clicking on 'Calendar' link...");
     await page.click(calendarLink);
     console.log("Verifying 'Calendar' page URL...");
-    await expect(page).toHaveURL("https://dev-risepoint-nku.pantheonsite.io/calendar/");
+    await expect(page).toHaveURL(
+      "https://dev-risepoint-nku.pantheonsite.io/calendar/"
+    );
     console.log("Navigation to 'Calendar' page verified successfully.");
     await page.goBack();
     await page.click(gettingStartedSelector); // Re-click Getting Started to expand it again
@@ -55,12 +61,21 @@ test.describe("Programs Section", () => {
     // Step 5: Verify Map Page Link
     const mapLink = "#mega-menu-item-6232 > a"; // Selector for Map link
     console.log("Waiting for 'Map' link to be visible...");
-    await page.waitForSelector(mapLink, { state: "visible" });
+    await page.waitForSelector(mapLink, { state: "visible" }); // Ensure the link is visible
+
     console.log("Clicking on 'Map' link...");
-    await page.click(mapLink);
+    await page.click(mapLink); // Click the link
+
+    console.log("Waiting for the page to fully load...");
+    await page.waitForLoadState("networkidle"); // Wait for the network to be idle (all requests finished)
+
     console.log("Verifying 'Map' page URL...");
-    await expect(page).toHaveURL("https://dev-risepoint-nku.pantheonsite.io/map/");
+    await expect(page).toHaveURL(
+      "https://dev-risepoint-nku.pantheonsite.io/map/",
+      { timeout: 15000 }
+    ); // Check URL with a 15-second timeout
+
     console.log("Navigation to 'Map' page verified successfully.");
-    await page.goBack();
+    await page.goBack(); // Navigate back to the previous page
   });
 });
