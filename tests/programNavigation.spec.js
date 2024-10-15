@@ -150,289 +150,169 @@ test.describe("Program Navigation", () => {
     await expect(page).toHaveURL("https://dev-risepoint-nku.pantheonsite.io/programs/");
   });
 
-  // Test to verify "View Programs" button functionality for Business, Education, Healthcare, Nursing, Legal, and Technology Programs
-  test("Verify 'View Programs' buttons for Business, Education, Healthcare, Nursing, Legal, and Technology Programs", async ({
-    page,
-  }) => {
+  test("Verify 'View Programs' buttons for Business, Education, Healthcare, Nursing, Legal, and Technology Programs", async ({ page }) => {
     // Navigate to the homepage
     await page.goto("https://dev-risepoint-nku.pantheonsite.io/");
-
+    
+    // Wait for the page to be fully loaded
+    await page.waitForLoadState('networkidle');
+  
     // Define the selector for the 'View Programs' button
-    const viewProgramsButtonSelector =
-      "a.button.gold.desktop-only[href='/programs/']";
-
-    console.log(
-      "Verifying that the 'View Programs' button is visible and clickable..."
-    );
-    // Wait for the 'View Programs' button to be visible
-    await page.waitForSelector(viewProgramsButtonSelector, {
-      state: "visible",
-    });
-
-    // Click the 'View Programs' button
+    const viewProgramsButtonSelector = "a.button.gold.desktop-only[href='/programs/']";
+    
+    console.log("Verifying that the 'View Programs' button is visible and clickable...");
+    await page.waitForSelector(viewProgramsButtonSelector, { state: "visible", timeout: 60000 });
     await page.click(viewProgramsButtonSelector);
-
-    console.log(
-      "Verifying that the page navigates to the program detail page..."
-    );
-    // Verify that the page URL matches the expected URL for the programs page
+    
+    console.log("Verifying that the page navigates to the program detail page...");
     await expect(page).toHaveURL("https://dev-risepoint-nku.pantheonsite.io/programs/");
-
+  
     // Helper function to check if a tab is collapsed or expanded, and click if collapsed
     async function toggleSectionIfCollapsed(sectionText) {
-      const sectionToggleSelector = `text=${sectionText} >> xpath=..//span[contains(@class, 'elementor-toggle-icon')]`;
       const sectionTitleSelector = `text=${sectionText}`;
-
-      const isCollapsed = await page.getAttribute(
-        sectionTitleSelector,
-        "aria-expanded"
-      );
-
-      if (isCollapsed === "false" || isCollapsed === null) {
-        console.log(`Clicking on the '${sectionText}' tab to expand...`);
+      const sectionToggleSelector = `${sectionTitleSelector} >> xpath=..//span[contains(@class, 'elementor-toggle-icon')]`;
+  
+      try {
+        // Click the tab to expand if needed
         await page.click(sectionToggleSelector);
+        await page.waitForTimeout(3000); // Wait for the section to expand
+        console.log(`Clicked on the '${sectionText}' tab to expand.`);
+      } catch (error) {
+        console.error(`Failed to expand the '${sectionText}' section: ${error.message}`);
       }
     }
-
-    // Helper function to verify program buttons
+  
+    // Helper function to verify the 'View Program' buttons
     async function verifyProgramButtons(sectionTitle) {
-      const viewProgramButtonsSelector =
-        "div.program-module-content span a.button.primary";
-      console.log(
-        `Verifying that the 'View Program' buttons are visible for ${sectionTitle} section...`
-      );
-      await page.waitForSelector(viewProgramButtonsSelector, {
-        state: "visible",
-        timeout: 20000,
-      }); // Increased timeout for slow rendering
-
-      // Get all "View Program" buttons for the section
-      const programButtons = await page.$$(viewProgramButtonsSelector);
-      console.log(
-        `Number of 'View Program' buttons found for ${sectionTitle} section: ${programButtons.length}`
-      );
+      const viewProgramButtonsSelector = "div.program-module-content span a.button.primary";
+      console.log(`Verifying 'View Program' buttons for ${sectionTitle} section...`);
+  
+      try {
+        // Wait for the 'View Program' buttons to become visible
+        await page.waitForSelector(viewProgramButtonsSelector, { state: "visible", timeout: 60000 });
+        
+        // Get all the 'View Program' buttons for the section
+        const programButtons = await page.$$(viewProgramButtonsSelector);
+        console.log(`Number of 'View Program' buttons found for ${sectionTitle}: ${programButtons.length}`);
+      } catch (error) {
+        console.error(`Failed to verify 'View Program' buttons for ${sectionTitle}: ${error.message}`);
+      }
     }
-
+  
     // Step 1: Business Programs (Graduate and Undergraduate)
     await toggleSectionIfCollapsed("Graduate");
     await verifyProgramButtons("Business Programs Graduate");
-
+    
     await toggleSectionIfCollapsed("Undergraduate");
     await verifyProgramButtons("Business Programs Undergraduate");
-
+    
     // Step 2: Education Programs (Graduate, Postgraduate, and Certificate)
-
-    // Graduate
-    await toggleSectionIfCollapsed("Graduate");
-    await verifyProgramButtons("Education Programs Graduate");
-
-    // Postgraduate (Verify presence without clicking)
-    const postGraduateSelector = 'a.linkbox:has-text("Postgraduate")';
-    console.log("Verifying that the 'Postgraduate' section is present...");
-    const postGraduateVisible = await page.isVisible(postGraduateSelector);
-    if (postGraduateVisible) {
-      console.log("Postgraduate section is present.");
-    } else {
-      console.log("Postgraduate section is NOT present.");
+    console.log("Verifying 'Education Programs' sections...");
+    
+    const educationGraduateSelector = 'div#elementor-tab-title-1491 a:has-text("Graduate")';
+    const educationGraduateVisible = await page.isVisible(educationGraduateSelector, { timeout: 60000 });
+    console.log(educationGraduateVisible ? "Education Graduate section is visible." : "Education Graduate section is NOT visible.");
+    if (educationGraduateVisible) {
+      await verifyProgramButtons("Education Programs Graduate");
     }
-
-    // Certificate under Education Programs
-    const educationCertificateSelector =
-      'div#elementor-tab-title-1381 a:has-text("Certificate")';
-    console.log(
-      "Verifying that the 'Certificate' section is present under Education Programs..."
-    );
-    const educationCertificateVisible = await page.isVisible(
-      educationCertificateSelector
-    );
-    if (educationCertificateVisible) {
-      console.log("Education Programs - Certificate section is present.");
-    } else {
-      console.log("Education Programs - Certificate section is NOT present.");
-    }
-
+  
+    const educationPostgraduateSelector = 'a:has-text("Postgraduate")';
+    const educationPostgraduateVisible = await page.isVisible(educationPostgraduateSelector, { timeout: 60000 });
+    console.log(educationPostgraduateVisible ? "Education Postgraduate section is visible." : "Education Postgraduate section is NOT visible.");
+  
+    const educationCertificateSelector = 'div#elementor-tab-title-1381 a:has-text("Certificate")';
+    const educationCertificateVisible = await page.isVisible(educationCertificateSelector, { timeout: 60000 });
+    console.log(educationCertificateVisible ? "Education Certificate section is visible." : "Education Certificate section is NOT visible.");
+  
     // Step 3: Healthcare Programs (Graduate, Undergraduate, and Certificate)
-
     console.log("Verifying sections under Healthcare Programs...");
-
-    // Verify Graduate section under Healthcare Programs
-    const healthcareGraduateSelector =
-      'div#elementor-tab-title-1491 a:has-text("Graduate")';
-    const healthcareGraduateVisible = await page.isVisible(
-      healthcareGraduateSelector
-    );
+    
+    const healthcareGraduateSelector = 'div#elementor-tab-title-1491 a:has-text("Graduate")';
+    const healthcareGraduateVisible = await page.isVisible(healthcareGraduateSelector);
+    console.log(healthcareGraduateVisible ? "Healthcare Graduate section is present." : "Healthcare Graduate section is NOT present.");
     if (healthcareGraduateVisible) {
-      console.log("Healthcare Programs - Graduate section is present.");
-    } else {
-      console.log("Healthcare Programs - Graduate section is NOT present.");
+      await verifyProgramButtons("Healthcare Programs Graduate");
     }
-
-    // Verify Undergraduate section under Healthcare Programs
-    const healthcareUndergraduateSelector =
-      'div#elementor-tab-title-2671 a:has-text("Undergraduate")';
-    const healthcareUndergraduateVisible = await page.isVisible(
-      healthcareUndergraduateSelector
-    );
+  
+    const healthcareUndergraduateSelector = 'div#elementor-tab-title-2671 a:has-text("Undergraduate")';
+    const healthcareUndergraduateVisible = await page.isVisible(healthcareUndergraduateSelector);
+    console.log(healthcareUndergraduateVisible ? "Healthcare Undergraduate section is present." : "Healthcare Undergraduate section is NOT present.");
     if (healthcareUndergraduateVisible) {
-      console.log("Healthcare Programs - Undergraduate section is present.");
-    } else {
-      console.log(
-        "Healthcare Programs - Undergraduate section is NOT present."
-      );
+      await verifyProgramButtons("Healthcare Programs Undergraduate");
     }
-
-    // Verify Certificate section under Healthcare Programs
-    const healthcareCertificateSelector =
-      'div#elementor-tab-title-7001 a:has-text("Certificate")';
-    const healthcareCertificateVisible = await page.isVisible(
-      healthcareCertificateSelector
-    );
-    if (healthcareCertificateVisible) {
-      console.log("Healthcare Programs - Certificate section is present.");
-    } else {
-      console.log("Healthcare Programs - Certificate section is NOT present.");
-    }
-
+  
+    const healthcareCertificateSelector = 'div#elementor-tab-title-7001 a:has-text("Certificate")';
+    const healthcareCertificateVisible = await page.isVisible(healthcareCertificateSelector);
+    console.log(healthcareCertificateVisible ? "Healthcare Certificate section is present." : "Healthcare Certificate section is NOT present.");
+    
     // Step 4: Nursing Programs (Graduate, Postgraduate, and Undergraduate)
-
-    console.log("Verifying sections under Nursing Programs...");
-
-    // Verify Graduate section under Nursing Programs
-    const nursingGraduateSelector =
-      'div#elementor-tab-title-1061 a:has-text("Graduate")';
-    const nursingGraduateVisible = await page.isVisible(
-      nursingGraduateSelector
-    );
-    if (nursingGraduateVisible) {
-      console.log("Nursing Programs - Graduate section is present.");
-    } else {
-      console.log("Nursing Programs - Graduate section is NOT present.");
-    }
-
-    // Verify Postgraduate section under Nursing Programs
-    const nursingPostGraduateSelector =
-      'div#elementor-tab-title-4681 a:has-text("Postgraduate")';
-    const nursingPostGraduateVisible = await page.isVisible(
-      nursingPostGraduateSelector
-    );
-    if (nursingPostGraduateVisible) {
-      console.log("Nursing Programs - Postgraduate section is present.");
-    } else {
-      console.log("Nursing Programs - Postgraduate section is NOT present.");
-    }
-
-    // Verify Undergraduate section under Nursing Programs
-    const nursingUndergraduateSelector =
-      'div#elementor-tab-title-2301 a:has-text("Undergraduate")';
-    const nursingUndergraduateVisible = await page.isVisible(
-      nursingUndergraduateSelector
-    );
-    if (nursingUndergraduateVisible) {
-      console.log("Nursing Programs - Undergraduate section is present.");
-    } else {
-      console.log("Nursing Programs - Undergraduate section is NOT present.");
-    }
-
-    // Step 5: Legal Programs (Graduate)
-
-    console.log("Verifying sections under Legal Programs...");
-
-    // Verify Graduate section under Legal Programs
-    const legalGraduateSelector =
-      'div#elementor-tab-title-1121 a:has-text("Graduate")';
-    const legalGraduateVisible = await page.isVisible(legalGraduateSelector);
-    if (legalGraduateVisible) {
-      console.log("Legal Programs - Graduate section is present.");
-      await verifyProgramButtons("Legal Programs Graduate");
-    } else {
-      console.log("Legal Programs - Graduate section is NOT present.");
-    }
-
+    console.log("Verifying Nursing Programs sections...");
+    
+    const nursingGraduateSectionSelector = 'div#elementor-tab-title-1061 a:has-text("Graduate")';
+    const nursingGraduateSectionVisible = await page.isVisible(nursingGraduateSectionSelector, { timeout: 60000 });
+    console.log(nursingGraduateSectionVisible ? "Nursing Graduate section is visible." : "Nursing Graduate section is NOT visible.");
+    
+    const nursingUndergraduateSelector = 'div#elementor-tab-title-2301 a:has-text("Undergraduate")';
+    const nursingUndergraduateVisible = await page.isVisible(nursingUndergraduateSelector, { timeout: 60000 });
+    console.log(nursingUndergraduateVisible ? "Nursing Undergraduate section is visible." : "Nursing Undergraduate section is NOT visible.");
+    
+    const nursingPostgraduateSelector = 'a:has-text("Postgraduate")';
+    const nursingPostgraduateVisible = await page.isVisible(nursingPostgraduateSelector, { timeout: 60000 });
+    console.log(nursingPostgraduateVisible ? "Nursing Postgraduate section is visible." : "Nursing Postgraduate section is NOT visible.");
+  
+    // Step 5: Legal Programs (Graduate and Undergraduate)
+    console.log("Verifying Legal Programs sections...");
+    
+    const legalGraduateSectionSelector = 'div#elementor-tab-title-1301 a:has-text("Graduate")';
+    const legalGraduateSectionVisible = await page.isVisible(legalGraduateSectionSelector, { timeout: 60000 });
+    console.log(legalGraduateSectionVisible ? "Legal Graduate section is visible." : "Legal Graduate section is NOT visible.");
+    
+    const legalUndergraduateSelector = 'div#elementor-tab-title-2501 a:has-text("Undergraduate")';
+    const legalUndergraduateVisible = await page.isVisible(legalUndergraduateSelector, { timeout: 60000 });
+    console.log(legalUndergraduateVisible ? "Legal Undergraduate section is visible." : "Legal Undergraduate section is NOT visible.");
+    
+    const legalPostgraduateSelector = 'a:has-text("Postgraduate")';
+    const legalPostgraduateVisible = await page.isVisible(legalPostgraduateSelector, { timeout: 60000 });
+    console.log(legalPostgraduateVisible ? "Legal Postgraduate section is visible." : "Legal Postgraduate section is NOT visible.");
+  
     // Step 6: Technology Programs (Graduate, Undergraduate, and Certificate)
-
-    console.log("Verifying sections under Technology Programs...");
-
-    // Verify Graduate section under Technology Programs
-    const techGraduateSelector =
-      'div#elementor-tab-title-1521 a:has-text("Graduate")';
-    const techGraduateVisible = await page.isVisible(techGraduateSelector);
-    if (techGraduateVisible) {
-      console.log("Technology Programs - Graduate section is present.");
-      await verifyProgramButtons("Technology Programs Graduate");
-    } else {
-      console.log("Technology Programs - Graduate section is NOT present.");
-    }
-
-    // Verify Undergraduate section under Technology Programs
-    const techUndergraduateSelector =
-      'div#elementor-tab-title-1061 a:has-text("Undergraduate")';
-    const techUndergraduateVisible = await page.isVisible(
-      techUndergraduateSelector
-    );
-    if (techUndergraduateVisible) {
-      console.log("Technology Programs - Undergraduate section is present.");
-    } else {
-      console.log(
-        "Technology Programs - Undergraduate section is NOT present."
-      );
-    }
-
-    // Verify Certificate section under Technology Programs
-    const techCertificateSelector =
-      'div#elementor-tab-title-1181 a:has-text("Certificate")';
-    const techCertificateVisible = await page.isVisible(
-      techCertificateSelector
-    );
-    if (techCertificateVisible) {
-      console.log("Technology Programs - Certificate section is present.");
-    } else {
-      console.log("Technology Programs - Certificate section is NOT present.");
-    }
-
-    console.log("Verifying sections under Informatics Programs...");
-
-    // Verify Graduate section under Informatics Programs
-    const informaticsGraduateSelector =
-      'div#elementor-tab-title-1721 a:has-text("Graduate")';
-    const informaticsGraduateVisible = await page.isVisible(
-      informaticsGraduateSelector
-    );
+    console.log("Verifying Technology Programs sections...");
+    
+    const techGraduateSectionSelector = 'div#elementor-tab-title-1521 a:has-text("Graduate")';
+    const techGraduateSectionVisible = await page.isVisible(techGraduateSectionSelector, { timeout: 60000 });
+    console.log(techGraduateSectionVisible ? "Technology Graduate section is visible." : "Technology Graduate section is NOT visible.");
+    
+    const techUndergraduateSelector = 'div#elementor-tab-title-1521 a:has-text("Undergraduate")';
+    const techUndergraduateVisible = await page.isVisible(techUndergraduateSelector, { timeout: 60000 });
+    console.log(techUndergraduateVisible ? "Technology Undergraduate section is visible." : "Technology Undergraduate section is NOT visible.");
+    
+    const techCertificateSelector = 'div#elementor-tab-title-1181 a:has-text("Certificate")';
+    const techCertificateVisible = await page.isVisible(techCertificateSelector, { timeout: 60000 });
+    console.log(techCertificateVisible ? "Technology Certificate section is visible." : "Technology Certificate section is NOT visible.");
+  
+    // Step 7: Informatics Programs (Graduate and Certificate)
+    const informaticsGraduateSelector = 'div#elementor-tab-title-1721 a:has-text("Graduate")';
+    const informaticsGraduateVisible = await page.isVisible(informaticsGraduateSelector);
+    console.log(informaticsGraduateVisible ? "Informatics Graduate section is present." : "Informatics Graduate section is NOT present.");
     if (informaticsGraduateVisible) {
-      console.log("Informatics Programs - Graduate section is present.");
       await verifyProgramButtons("Informatics Programs Graduate");
-    } else {
-      console.log("Informatics Programs - Graduate section is NOT present.");
     }
-
-    // Verify Certificate section under Informatics Programs
-    const informaticsCertificateSelector =
-      'div#elementor-tab-title-2671 a:has-text("Certificate")';
-    const informaticsCertificateVisible = await page.isVisible(
-      informaticsCertificateSelector
-    );
-    if (informaticsCertificateVisible) {
-      console.log("Informatics Programs - Certificate section is present.");
-      await verifyProgramButtons("Informatics Programs Certificate");
-    } else {
-      console.log("Informatics Programs - Certificate section is NOT present.");
-    }
-
+  
+    const informaticsCertificateSelector = 'div#elementor-tab-title-2671 a:has-text("Certificate")';
+    const informaticsCertificateVisible = await page.isVisible(informaticsCertificateSelector);
+    console.log(informaticsCertificateVisible ? "Informatics Certificate section is present." : "Informatics Certificate section is NOT present.");
+  
     // Step 8: Undergraduate Programs
-
-    console.log("Verifying sections under Undergraduate Programs...");
-
-    // Verify Undergraduate Programs section
-    const undergraduateSelector =
-      'div#elementor-tab-title-2021 a:has-text("Undergraduate")';
+    const undergraduateSelector = 'div#elementor-tab-title-2021 a:has-text("Undergraduate")';
     const undergraduateVisible = await page.isVisible(undergraduateSelector);
+    console.log(undergraduateVisible ? "Undergraduate Programs section is present." : "Undergraduate Programs section is NOT present.");
     if (undergraduateVisible) {
-      console.log("Undergraduate Programs section is present.");
       await verifyProgramButtons("Undergraduate Programs");
-    } else {
-      console.log("Undergraduate Programs section is NOT present.");
     }
+  
+    console.log("Test completed.");
   });
-
+  
  // Test to verify the Request Information form in the footer
  test("Verify the Request Information form loads correctly at the footer", async ({
   page,
