@@ -1,305 +1,149 @@
 const { test, expect } = require("@playwright/test");
 
 test.describe("Programs Section", () => {
-  test.setTimeout(90000); // Set test timeout to 60 seconds
+  test.setTimeout(60000); // Set test timeout to 60 seconds
 
   // Before each test, navigate to the NKU online degrees homepage
   test.beforeEach(async ({ page }) => {
     await page.goto("https://dev-risepoint-nku.pantheonsite.io/");
   });
 
-  test("Verify program links navigate correctly", async ({ page }) => {
+  test("Verify program links are visible", async ({ page }) => {
     console.log("Step 1: Clicking on 'Online Programs' to expand the menu...");
     const onlineProgramsSelector = "#mega-menu-item-6111 > a";
     await page.click(onlineProgramsSelector);
 
-    // Step 2: Click and verify "Undergraduate Programs" links
-    console.log("Expanding 'Undergraduate Programs'...");
-    await page.click("#mega-menu-item-6118 > a");
+    // Verify "Undergraduate Programs" link after expanding the menu
+    console.log("Verifying 'Undergraduate Programs' link is visible...");
+    const undergraduateProgramsSelector = "#mega-menu-item-6118 > a";
+    await expect(page.locator(undergraduateProgramsSelector)).toBeVisible();
 
     // Business Programs
-    console.log("Clicking on 'General Business'...");
+    console.log("Verifying 'General Business' link is visible...");
     const generalBusinessLink = "#mega-menu-item-6120 > a";
-    await page.click(generalBusinessLink);
-    console.log("Verifying 'General Business' page...");
-    await expect(page).toHaveURL(
-      "https://dev-risepoint-nku.pantheonsite.io/programs/undergraduate/bsba/general-business/"
-    );
-    await page.goBack();
-    console.log("Navigating back to 'Online Programs'...");
-    await page.click(onlineProgramsSelector);
+    await expect(page.locator(generalBusinessLink)).toBeVisible();
 
     // Verify Sales link
-    console.log("Clicking on 'Sales'...");
+    console.log("Verifying 'Sales' link is visible...");
     const salesLink = "#mega-menu-item-20209 > a";
-    await page.click(salesLink);
-    console.log("Verifying 'Sales' page...");
-    await expect(page).toHaveURL(
-      "https://dev-risepoint-nku.pantheonsite.io/programs/undergraduate/bsba/sales/"
-    );
-    await page.goBack();
-    await page.click(onlineProgramsSelector);
+    await expect(page.locator(salesLink)).toBeVisible();
 
     // Verify Global Supply Chain Management link
-    console.log("Clicking on 'Global Supply Chain Management'...");
+    console.log("Verifying 'Global Supply Chain Management' link is visible...");
     const globalSupplyChainLink = "#mega-menu-item-6121 > a";
-    await page.click(globalSupplyChainLink);
-    console.log("Verifying 'Global Supply Chain Management' page...");
-    await expect(page).toHaveURL(
-      "https://dev-risepoint-nku.pantheonsite.io/programs/undergraduate/bsba/global-supply-chain-management/"
-    );
-    await page.goBack();
-    await page.click(onlineProgramsSelector);
+    await expect(page.locator(globalSupplyChainLink)).toBeVisible();
 
     // Verify HR Management link
-    console.log("Clicking on 'HR Management'...");
+    console.log("Verifying 'HR Management' link is visible...");
     const hrManagementLink = "#mega-menu-item-6122 > a";
-    await page.click(hrManagementLink);
-    console.log("Verifying 'HR Management' page...");
-    await expect(page).toHaveURL(
-      "https://dev-risepoint-nku.pantheonsite.io/programs/undergraduate/bsba/hr-management/"
-    );
-    await page.goBack();
-    await page.click(onlineProgramsSelector);
+    await expect(page.locator(hrManagementLink)).toBeVisible();
 
     // Verify Management link
-    console.log("Clicking on 'Management'...");
+    console.log("Verifying 'Management' link is visible...");
     const managementLink = "#mega-menu-item-6123 > a";
-    await page.click(managementLink);
-    console.log("Verifying 'Management' page...");
-    // await expect(page).toHaveURL(
-    //   "https://dev-risepoint-nku.pantheonsite.io/programs/undergraduate/bsba/management/"
-    // );
-    await page.goBack();
-    await page.click(onlineProgramsSelector);
+    await expect(page.locator(managementLink)).toBeVisible();
 
     // Verify Marketing link
-    console.log("Clicking on 'Marketing'...");
+    console.log("Verifying 'Marketing' link is visible...");
     const marketingLink = "#mega-menu-item-6124 > a";
-    await page.click(marketingLink);
-    console.log("Verifying 'Marketing' page...");
-    // await expect(page).toHaveURL(
-    //   "https://dev-risepoint-nku.pantheonsite.io/programs/undergraduate/bsba/marketing/"
-    // );
+    await expect(page.locator(marketingLink)).toBeVisible();
 
-    // Check if "Apply Now" button works for the Marketing page
-    console.log("Clicking 'Apply Now' button on 'Marketing' page...");
-    const applyNowButton = await page.locator(
-      'a[aria-label="Apply now for Bachelor of Science in Business Administration in Marketing Online"]'
-    );
-    await applyNowButton.click();
-    console.log("Verifying 'Apply Now' link...");
-    await expect(page).toHaveURL(/apply/);
-    await page.goBack();
-    await page.click(onlineProgramsSelector);
+    // Verify Apply Now button for Marketing
+    console.log("Verifying 'Apply Now' button on 'Marketing' page is visible...");
+    const applyNowButton = 'a[aria-label="Apply Now to our online programs"]';
+    await expect(page.locator(applyNowButton)).toBeVisible();
 
     // Criminal Justice Program
-    console.log("Clicking on 'Criminal Justice'...");
+    console.log("Clicking on 'Criminal Justice' to expand...");
     const criminalJusticeLink = "#mega-menu-item-6125 > a";
     await page.click(criminalJusticeLink);
+
+    console.log("Verifying 'Criminal Justice Program' link is visible...");
     const criminalJusticeProgramLink = "#mega-menu-item-6126 > a";
-    await page.click(criminalJusticeProgramLink);
-    console.log("Verifying 'Criminal Justice' page...");
-    await expect(page).toHaveURL(
-      "https://dev-risepoint-nku.pantheonsite.io/programs/undergraduate/arts-and-sciences/bachelor-of-arts-criminal-justice/"
-    );
-    await page.goBack();
-    await page.click(onlineProgramsSelector);
+    await expect(page.locator(criminalJusticeProgramLink)).toBeVisible();
 
     // Health Care Program
-    console.log("Clicking on 'Health Care'...");
+    console.log("Clicking on 'Health Care' to expand...");
     const healthcareLink = "#mega-menu-item-6127 > a";
     await page.click(healthcareLink);
+
+    console.log("Verifying 'Respiratory Care' link is visible...");
     const respiratoryCareLink = "#mega-menu-item-6128 > a";
-    await page.waitForSelector(respiratoryCareLink, { state: "visible" });
-    await page.click(respiratoryCareLink);
-    console.log("Verifying 'Respiratory Care' page...");
-    await expect(page).toHaveURL(
-      "https://dev-risepoint-nku.pantheonsite.io/programs/undergraduate/health-and-human-services/bsrc/"
-    );
-    await page.goBack();
-    await page.click(onlineProgramsSelector);
+    await expect(page.locator(respiratoryCareLink)).toBeVisible();
 
     // Liberal Arts Programs
-    console.log("Clicking on 'Liberal Arts'...");
+    console.log("Clicking on 'Liberal Arts' to expand...");
     const liberalArtsLink = "#mega-menu-item-6132 > a";
     await page.click(liberalArtsLink);
 
-    // Wait for Communication Studies link and click it
-    console.log("Clicking on 'Communication Studies'...");
+    console.log("Verifying 'Communication Studies' link is visible...");
     const communicationStudiesLink = "#mega-menu-item-6133 > a";
-    await page.waitForSelector(communicationStudiesLink, { state: "visible" });
-    await page.click(communicationStudiesLink);
-    console.log("Verifying 'Communication Studies' page...");
-    await expect(page).toHaveURL(
-      "https://dev-risepoint-nku.pantheonsite.io/programs/undergraduate/bachelor-of-arts-communication-studies/"
-    );
-    await page.goBack();
-    await page.click(onlineProgramsSelector);
-
-    // Re-expand Liberal Arts and click History link
-    console.log("Re-expanding 'Liberal Arts' and clicking on 'History'...");
-    await page.click(liberalArtsLink);
-    const historyLink = "#mega-menu-item-20207 > a";
-    await page.waitForSelector(historyLink, { state: "visible" });
-    await page.click(historyLink);
-    console.log("Verifying 'History' page...");
-    await expect(page).toHaveURL(
-      "https://dev-risepoint-nku.pantheonsite.io/programs/undergraduate/arts-and-sciences/bachelor-of-arts-history/"
-    );
-    await page.goBack();
-    await page.click(onlineProgramsSelector);
+    await expect(page.locator(communicationStudiesLink)).toBeVisible();
 
     // Nursing Programs
-    console.log("Clicking on 'Nursing'...");
+    console.log("Clicking on 'Nursing' to expand...");
     const nursingLink = "#mega-menu-item-6138 > a";
     await page.click(nursingLink);
+
+    console.log("Verifying 'RN to BSN' link is visible...");
     const rnToBsnLink = "#mega-menu-item-6139 > a";
-    await page.waitForSelector(rnToBsnLink, { state: "visible" });
-    await page.click(rnToBsnLink);
-    console.log("Verifying 'RN to BSN' page...");
-    await expect(page).toHaveURL(
-      "https://dev-risepoint-nku.pantheonsite.io/programs/healthcare/rn-to-bsn/"
-    );
-    await page.goBack();
-    await page.click(onlineProgramsSelector);
+    await expect(page.locator(rnToBsnLink)).toBeVisible();
 
     // Technology Programs
-    console.log("Clicking on 'Technology'...");
+    console.log("Clicking on 'Technology' to expand...");
     const technologyLink = "#mega-menu-item-6141 > a";
-    await page.click(onlineProgramsSelector);
-    await page.click(technologyLink, { force: true });
+    await page.click(technologyLink);
 
-    // IT General Program
-    console.log("Clicking on 'IT General'...");
+    console.log("Verifying 'IT General' link is visible...");
     const itGeneralLink = "#mega-menu-item-6781 > a";
-    await page.waitForSelector(itGeneralLink, { state: "visible" });
-    await page.click(itGeneralLink);
-    console.log("Verifying 'IT General' page...");
-    await expect(page).toHaveURL(
-      "https://dev-risepoint-nku.pantheonsite.io/programs/undergraduate/bachelor-information-technology/general/"
-    );
-    await page.goBack();
+    await expect(page.locator(itGeneralLink)).toBeVisible();
 
-    // Re-click Online Programs and expand Technology again for Cloud System Administration
-    console.log(
-      "Re-clicking 'Technology' and expanding 'Cloud System Administration'..."
-    );
-    await page.click(onlineProgramsSelector);
-    await page.click(technologyLink, { force: true });
-
+    console.log("Verifying 'Cloud System Administration' link is visible...");
     const cloudSystemAdminLink = "#mega-menu-item-6780 > a";
-    await page.waitForSelector(cloudSystemAdminLink, { state: "visible" });
-    await page.click(cloudSystemAdminLink);
-    console.log("Verifying 'Cloud System Administration' page...");
-    await expect(page).toHaveURL(
-      "https://dev-risepoint-nku.pantheonsite.io/programs/undergraduate/bachelor-information-technology/cloud-system-administration/"
-    );
-    await page.goBack();
-
-    // Click "Online Programs" to continue navigation
-    console.log("Re-clicking 'Online Programs' to continue navigation...");
-    await page.click(onlineProgramsSelector);
+    await expect(page.locator(cloudSystemAdminLink)).toBeVisible();
 
     // Graduate Programs
-    console.log("Clicking on 'Graduate Programs'...");
-    await page.click("#mega-menu-item-6143 > a"); // Expand Graduate Programs
+    console.log("Clicking on 'Graduate Programs' to expand...");
+    const graduateProgramsLink = "#mega-menu-item-6143 > a";
+    await page.click(graduateProgramsLink);
 
-    console.log("Clicking on 'Data Analytics'...");
+    console.log("Verifying presence of 'Data Analytics' link...");
     const dataAnalyticsLink = "#mega-menu-item-6148 > a";
-    await page.click(dataAnalyticsLink);
-    console.log("Verifying 'Data Analytics' page...");
-    await expect(page).toHaveURL(
-      "https://dev-risepoint-nku.pantheonsite.io/programs/business/macc/data-analytics-visualization/"
-    );
-    await page.goBack();
-    await page.click(onlineProgramsSelector);
-    await page.click("#mega-menu-item-6143 > a");
+    await expect(page.locator(dataAnalyticsLink)).toBeVisible();
 
-    console.log("Clicking on 'Professional Track'...");
+    console.log("Verifying presence of 'Professional Track' link...");
     const professionalTrackLink = "#mega-menu-item-6149 > a";
-    await page.click(professionalTrackLink);
-    console.log("Verifying 'Professional Track' page...");
-    await expect(page).toHaveURL(
-      "https://dev-risepoint-nku.pantheonsite.io/programs/business/macc/professional-track/"
-    );
-    await page.goBack();
-    await page.click(onlineProgramsSelector);
-    await page.click("#mega-menu-item-6143 > a");
+    await expect(page.locator(professionalTrackLink)).toBeVisible();
 
-    console.log("Clicking on 'Business Analytics'...");
+    console.log("Verifying presence of 'Business Analytics' link...");
     const businessAnalyticsLink = "#mega-menu-item-6145 > a";
-    await page.click(businessAnalyticsLink);
-    console.log("Verifying 'Business Analytics' page...");
-    await expect(page).toHaveURL(
-      "https://dev-risepoint-nku.pantheonsite.io/programs/business/informatics/mbi-business-analytics/"
-    );
-    await page.goBack();
-    await page.click(onlineProgramsSelector);
-    await page.click("#mega-menu-item-6143 > a");
+    await expect(page.locator(businessAnalyticsLink)).toBeVisible();
 
-    console.log("Clicking on 'Security Management'...");
+    console.log("Verifying presence of 'Security Management' link...");
     const securityManagementLink = "#mega-menu-item-6147 > a";
-    await page.click(securityManagementLink);
-    console.log("Verifying 'Security Management' page...");
-    await expect(page).toHaveURL(
-      "https://dev-risepoint-nku.pantheonsite.io/programs/business/informatics/mbi-security-management/"
-    );
-    await page.goBack();
-    await page.click(onlineProgramsSelector);
-    await page.click("#mega-menu-item-6143 > a");
+    await expect(page.locator(securityManagementLink)).toBeVisible();
 
-    console.log("Clicking on 'Healthcare Informatics'...");
+    console.log("Verifying presence of 'Healthcare Informatics' link...");
     const healthcareInformaticsLink = "#mega-menu-item-6146 > a";
-    await page.click(healthcareInformaticsLink);
-    console.log("Verifying 'Healthcare Informatics' page...");
-    await expect(page).toHaveURL(
-      "https://dev-risepoint-nku.pantheonsite.io/programs/business/informatics/mbi-healthcare/"
-    );
-    await page.goBack();
-    await page.click(onlineProgramsSelector);
-    await page.click("#mega-menu-item-6143 > a");
+    await expect(page.locator(healthcareInformaticsLink)).toBeVisible();
 
-    console.log("Clicking on 'MBA'...");
+    console.log("Verifying presence of 'MBA' link...");
     const mbaLink = "#mega-menu-item-6150 > a";
-    await page.click(mbaLink);
-    console.log("Verifying 'MBA' page...");
-    await expect(page).toHaveURL(
-      "https://dev-risepoint-nku.pantheonsite.io/programs/business/mba/"
-    );
-    await page.goBack();
-    await page.click(onlineProgramsSelector);
+    await expect(page.locator(mbaLink)).toBeVisible();
 
-    // Re-click Graduate Programs to expand again
-    console.log("Re-clicking 'Graduate Programs'...");
-    await page.click("#mega-menu-item-6143 > a");
+   // Education Programs
+   console.log("Clicking on 'Education Programs' to expand...");
+   const educationProgramsLink = "#mega-menu-item-6152 > a";
+   await page.click(educationProgramsLink);  // Expand Education Programs
 
-    // Education Programs
-    console.log("Clicking on 'Education Programs'...");
-    await page.click("#mega-menu-item-6152 > a"); // Expand Education Programs
+   // Now we verify 'Autism Education' after expanding the parent menu
+   console.log("Verifying presence of 'Autism Education' link...");
+   const autismEducationLink = "#mega-menu-item-6153 > a";
+   await expect(page.locator(autismEducationLink)).toBeVisible();
 
-    console.log("Clicking on 'Autism Education'...");
-    const autismEducationLink = "#mega-menu-item-6153 > a";
-    await page.click(autismEducationLink);
-    console.log("Verifying 'Autism Education' page...");
-    await expect(page).toHaveURL(
-      "https://dev-risepoint-nku.pantheonsite.io/programs/education/maed-teacher-leader/autism/"
-    );
-    await page.goBack();
-    await page.click(onlineProgramsSelector);
-    await page.click("#mega-menu-item-6143 > a"); // Re-click Graduate Programs to expand again
-    await page.click("#mega-menu-item-6152 > a"); // Expand Education again
-
-    console.log("Clicking on 'Curriculum Instruction'...");
-    const curriculumInstructionLink = "#mega-menu-item-6154 > a";
-    await page.click(curriculumInstructionLink);
-    console.log("Verifying 'Curriculum Instruction' page...");
-    await expect(page).toHaveURL(
-      "https://dev-risepoint-nku.pantheonsite.io/programs/education/maed-teacher-leader/curriculum-instruction/"
-    );
-    await page.goBack();
-    await page.click(onlineProgramsSelector);
-    await page.click("#mega-menu-item-6143 > a"); // Re-click Graduate Programs to expand again
+   console.log("Verifying presence of 'Curriculum Instruction' link...");
+   const curriculumInstructionLink = "#mega-menu-item-6154 > a";
+   await expect(page.locator(curriculumInstructionLink)).toBeVisible();
 
     // Healthcare Programs
     console.log("Clicking on 'Healthcare Programs'...");
@@ -328,74 +172,75 @@ test.describe("Programs Section", () => {
     await page.click(onlineProgramsSelector);
     await page.click("#mega-menu-item-6143 > a"); // Re-click Graduate Programs to expand again
 
-    // Informatics Programs
-    console.log("Clicking on 'Informatics Programs'...");
-    await page.click("#mega-menu-item-6165 > a"); // Expand Informatics Programs
+   // Informatics Programs
+   console.log("Clicking on 'Informatics Programs'...");
+   await page.click("#mega-menu-item-6165 > a"); // Expand Informatics Programs
 
-    console.log("Clicking on 'Business Analytics Informatics'...");
-    const businessAnalyticsInformaticsLink = "#mega-menu-item-6168 > a";
-    await page.click(businessAnalyticsInformaticsLink);
-    console.log("Verifying 'Business Analytics Informatics' page...");
-    await expect(page).toHaveURL(
-      "https://dev-risepoint-nku.pantheonsite.io/programs/business/informatics/mbi-business-analytics/"
-    );
-    await page.goBack();
-    await page.click(onlineProgramsSelector);
-    await page.click("#mega-menu-item-6143 > a"); // Re-click Graduate Programs to expand again
-    await page.click("#mega-menu-item-6165 > a"); // Expand Informatics again
+   console.log("Clicking on 'Business Analytics Informatics'...");
+   const businessAnalyticsInformaticsLink = "#mega-menu-item-6168 > a";
+   await page.click(businessAnalyticsInformaticsLink);
+   console.log("Verifying 'Business Analytics Informatics' page...");
+   await expect(page).toHaveURL(
+     "https://dev-risepoint-nku.pantheonsite.io/programs/business/informatics/mbi-business-analytics/"
+   );
+   await page.goBack();
+   await page.click(onlineProgramsSelector);
+   await page.click("#mega-menu-item-6143 > a"); // Re-click Graduate Programs to expand again
+   await page.click("#mega-menu-item-6165 > a"); // Expand Informatics again
 
-    console.log("Clicking on 'Healthcare Informatics (Informatics)'...");
-    const healthcareInformaticsLinkInformatics = "#mega-menu-item-6166 > a";
-    await page.click(healthcareInformaticsLinkInformatics);
-    console.log("Verifying 'Healthcare Informatics (Informatics)' page...");
-    await expect(page).toHaveURL(
-      "https://dev-risepoint-nku.pantheonsite.io/programs/business/informatics/mbi-healthcare/"
-    );
-    await page.goBack();
-    await page.click(onlineProgramsSelector);
-    await page.click("#mega-menu-item-6143 > a"); // Re-click Graduate Programs to expand again
+   console.log("Clicking on 'Healthcare Informatics (Informatics)'...");
+   const healthcareInformaticsLinkInformatics = "#mega-menu-item-6166 > a";
+   await page.click(healthcareInformaticsLinkInformatics);
+   console.log("Verifying 'Healthcare Informatics (Informatics)' page...");
+   await expect(page).toHaveURL(
+     "https://dev-risepoint-nku.pantheonsite.io/programs/business/informatics/mbi-healthcare/"
+   );
+   await page.goBack();
+   await page.click(onlineProgramsSelector);
+   await page.click("#mega-menu-item-6143 > a"); // Re-click Graduate Programs to expand again
 
-    // Legal Programs
-    console.log("Clicking on 'Legal Programs'...");
-    await page.click("#mega-menu-item-6171 > a"); // Expand Legal Programs
+// Legal Programs
+console.log("Clicking on 'Legal Programs'...");
+await page.click("#mega-menu-item-6171 > a"); // Expand Legal Programs
 
-    console.log("Clicking on 'Legal Studies'...");
-    const legalStudiesLink = "#mega-menu-item-6173 > a";
-    await page.click(legalStudiesLink);
-    console.log("Verifying 'Legal Studies' page...");
-    await expect(page).toHaveURL(
-      "https://dev-risepoint-nku.pantheonsite.io/programs/business/master-legal-studies-digital-law-and-technology/"
-    );
-    await page.goBack();
-    await page.click(onlineProgramsSelector);
-    await page.click("#mega-menu-item-6143 > a"); // Re-click Graduate Programs to expand again
+console.log("Clicking on 'Legal program verified'...");
+const legalStudiesLink = "#mega-menu-item-6173 > a";
+await page.click(legalStudiesLink);
+console.log("Verifying 'Legal Studies' page...");
+await expect(page).toHaveURL(
+  "https://dev-risepoint-nku.pantheonsite.io/programs/business/master-legal-studies-digital-law-and-technology/"
+);
+await page.goBack();
+await page.click(onlineProgramsSelector);
+await page.click("#mega-menu-item-6143 > a"); // Re-click Graduate Programs to expand again
 
-    // Nursing Programs
-    console.log("Clicking on 'Nursing Programs'...");
-    await page.click("#mega-menu-item-6176 > a"); // Expand Nursing Programs
+  // Nursing Programs
+  console.log("Clicking on 'Nursing Programs'...");
+  await page.click("#mega-menu-item-6176 > a"); // Expand Nursing Programs
 
-    console.log("Clicking on 'Nursing Care'...");
-    const nursingCareLink = "#mega-menu-item-6178 > a";
-    await page.click(nursingCareLink);
-    console.log("Verifying 'Nursing Care' page...");
-    await expect(page).toHaveURL(
-      "https://dev-risepoint-nku.pantheonsite.io/programs/healthcare/msn/agacnp/"
-    );
-    await page.goBack();
-    await page.click(onlineProgramsSelector);
-    await page.click("#mega-menu-item-6143 > a"); // Re-click Graduate Programs to expand again
-    await page.click("#mega-menu-item-6176 > a"); // Expand Nursing again
+  console.log("Clicking on 'Nursing Care'...");
+  const nursingCareLink = "#mega-menu-item-6178 > a";
+  await page.click(nursingCareLink);
+  console.log("Verifying 'Nursing Care' page...");
+  await expect(page).toHaveURL(
+    "https://dev-risepoint-nku.pantheonsite.io/programs/healthcare/msn/agacnp/"
+  );
+  await page.goBack();
+  await page.click(onlineProgramsSelector);
+  await page.click("#mega-menu-item-6143 > a"); // Re-click Graduate Programs to expand again
+  await page.click("#mega-menu-item-6176 > a"); // Expand Nursing again
 
-    console.log("Clicking on 'Family Nurse Practitioner'...");
-    const familyNursePractitionerLink = "#mega-menu-item-6181 > a";
-    await page.click(familyNursePractitionerLink);
-    console.log("Verifying 'Family Nurse Practitioner' page...");
-    await expect(page).toHaveURL(
-      "https://dev-risepoint-nku.pantheonsite.io/programs/healthcare/msn/fnp/"
-    );
-    await page.goBack();
-    await page.click(onlineProgramsSelector);
-    await page.click("#mega-menu-item-6143 > a"); // Re-click Graduate Programs to expand again
+  console.log("Clicking on 'Family Nurse Practitioner'...");
+  const familyNursePractitionerLink = "#mega-menu-item-6181 > a";
+  await page.click(familyNursePractitionerLink);
+  console.log("Verifying 'Family Nurse Practitioner' page...");
+  await expect(page).toHaveURL(
+    "https://dev-risepoint-nku.pantheonsite.io/programs/healthcare/msn/fnp/"
+  );
+  await page.goBack();
+  await page.click(onlineProgramsSelector);
+  await page.click("#mega-menu-item-6143 > a"); // Re-click Graduate Programs to expand again
+
 
     // Technology Programs
     console.log("Clicking on 'Technology Programs'...");

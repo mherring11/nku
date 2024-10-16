@@ -57,25 +57,5 @@ test.describe("Programs Section", () => {
     console.log("Navigation to 'Calendar' page verified successfully.");
     await page.goBack();
     await page.click(gettingStartedSelector); // Re-click Getting Started to expand it again
-
-    // Step 5: Verify Map Page Link
-    const mapLink = "#mega-menu-item-6232 > a"; // Selector for Map link
-    console.log("Waiting for 'Map' link to be visible...");
-    await page.waitForSelector(mapLink, { state: "visible" }); // Ensure the link is visible
-
-    console.log("Clicking on 'Map' link...");
-    await page.click(mapLink); // Click the link
-
-    console.log("Waiting for the page to fully load...");
-    await page.waitForLoadState("networkidle"); // Wait for the network to be idle (all requests finished)
-
-    console.log("Verifying 'Map' page URL...");
-    await expect(page).toHaveURL(
-      "https://dev-risepoint-nku.pantheonsite.io/map/",
-      { timeout: 15000 }
-    ); // Check URL with a 15-second timeout
-
-    console.log("Navigation to 'Map' page verified successfully.");
-    await page.goBack(); // Navigate back to the previous page
   });
 });

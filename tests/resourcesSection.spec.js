@@ -109,7 +109,9 @@ test.describe("Resources Section", () => {
     console.log("Clicking and verifying 'FAQs' link...");
     const faqsLink = "#mega-menu-item-6238 > a";
     await page.click(faqsLink);
-    console.log("Verifying 'FAQs' page URL...");
+
+    // Wait for the correct navigation to complete
+    await page.waitForURL("https://dev-risepoint-nku.pantheonsite.io/faqs/", { timeout: 10000 });
     await expect(page).toHaveURL("https://dev-risepoint-nku.pantheonsite.io/faqs/");
     await page.goBack();
     await page.click(resourcesSelector); // Re-click Resources to expand again
@@ -118,7 +120,9 @@ test.describe("Resources Section", () => {
     console.log("Clicking and verifying 'Faculty' link...");
     const facultyLink = "#mega-menu-item-9135 > a";
     await page.click(facultyLink);
-    console.log("Verifying 'Faculty' page URL...");
+
+    // Wait for the correct navigation to complete
+    await page.waitForURL("https://dev-risepoint-nku.pantheonsite.io/faculty/", { timeout: 10000 });
     await expect(page).toHaveURL("https://dev-risepoint-nku.pantheonsite.io/faculty/");
     await page.goBack();
   });
