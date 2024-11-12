@@ -6,7 +6,7 @@ test.describe("Footer Links Verification", () => {
     page,
   }) => {
     // Navigate to the homepage
-    await page.goto("https://dev-risepoint-nku.pantheonsite.io/");
+    await page.goto("https://stage.onlinedegrees.nku.edu/");
 
     // Define the selectors for the Privacy Policy and Terms & Conditions links
     const privacyPolicyLinkSelector =
@@ -57,10 +57,10 @@ test.describe("Footer Links Verification", () => {
     );
     console.log("Terms & Conditions link works as expected.");
 
-    // Navigate back to the homepage
-    await page.goBack();
-    await page.waitForLoadState("networkidle");
-    console.log("Navigated back to the homepage after verifying both links.");
+  //   // Navigate back to the homepage
+  //   await page.goBack();
+  //   await page.waitForLoadState("networkidle");
+  //   console.log("Navigated back to the homepage after verifying both links.");
   });
 
     // Test to verify social media icons each link to the correct destination
@@ -68,7 +68,7 @@ test.describe("Footer Links Verification", () => {
     page,
   }) => {
     // Navigate to the homepage
-    await page.goto("https://onlinedegrees.nku.edu");
+    await page.goto("https://stage.onlinedegrees.nku.edu/");
 
     // Scroll to the bottom to ensure all footer links are visible
     await page.evaluate(() => {
