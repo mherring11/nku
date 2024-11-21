@@ -6,7 +6,7 @@ test.describe("Footer Links Verification", () => {
     page,
   }) => {
     // Navigate to the homepage
-    await page.goto("https://stage.onlinedegrees.nku.edu/");
+    await page.goto("https://onlinedegrees.nku.edu/");
 
     // Define the selectors for the Privacy Policy and Terms & Conditions links
     const privacyPolicyLinkSelector =
@@ -68,7 +68,7 @@ test.describe("Footer Links Verification", () => {
     page,
   }) => {
     // Navigate to the homepage
-    await page.goto("https://stage.onlinedegrees.nku.edu/");
+    await page.goto("https://onlinedegrees.nku.edu/");
 
     // Scroll to the bottom to ensure all footer links are visible
     await page.evaluate(() => {

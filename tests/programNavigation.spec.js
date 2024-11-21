@@ -11,7 +11,7 @@ test.describe("Program Navigation", () => {
         name: "Business Programs",
         linkSelector:
           "a[href='/programs/business/'] h3:has-text('Business Programs')",
-        expectedURL: "https://stage.onlinedegrees.nku.edu/programs/business/",
+        expectedURL: "https://onlinedegrees.nku.edu/programs/business/",
         courseCatalogSelector:
           "section.elementor-section[data-id='71caa73'] .program-card-container",
       },
@@ -19,7 +19,7 @@ test.describe("Program Navigation", () => {
         name: "Education Programs",
         linkSelector:
           "a[href='/programs/education/'] h3:has-text('Education Programs')",
-        expectedURL: "https://stage.onlinedegrees.nku.edu/programs/education/",
+        expectedURL: "https://onlinedegrees.nku.edu/programs/education/",
         courseCatalogSelector:
           "section.elementor-section[data-id='9013ff8'] .program-card-container",
       },
@@ -27,7 +27,7 @@ test.describe("Program Navigation", () => {
         name: "Healthcare Programs",
         linkSelector:
           "a[href='/programs/healthcare/'] h3:has-text('Healthcare Programs')",
-        expectedURL: "https://stage.onlinedegrees.nku.edu/programs/healthcare/",
+        expectedURL: "https://onlinedegrees.nku.edu/programs/healthcare/",
         courseCatalogSelector:
           "section.elementor-section[data-id='4c79b726'] .program-card-container",
       },
@@ -36,7 +36,7 @@ test.describe("Program Navigation", () => {
         linkSelector:
           "a[href='/programs/business/informatics/'] h3:has-text('Informatics Programs')",
         expectedURL:
-          "https://stage.onlinedegrees.nku.edu/programs/business/informatics/",
+          "https://onlinedegrees.nku.edu/programs/business/informatics/",
         courseCatalogSelector:
           "section.elementor-section[data-id='483270a'] .program-card-container",
       },
@@ -45,13 +45,13 @@ test.describe("Program Navigation", () => {
         linkSelector:
           "a[href='/programs/business/master-legal-studies-digital-law-and-technology/'] h3:has-text('Legal Programs')",
         expectedURL:
-          "https://stage.onlinedegrees.nku.edu/programs/business/master-legal-studies-digital-law-and-technology/",
+          "https://onlinedegrees.nku.edu/programs/business/master-legal-studies-digital-law-and-technology/",
       },
       {
         name: "Nursing Programs",
         linkSelector:
           "a[href='/programs/healthcare/'] h3:has-text('Nursing Programs')",
-        expectedURL: "https://stage.onlinedegrees.nku.edu/programs/healthcare/",
+        expectedURL: "https://onlinedegrees.nku.edu/programs/healthcare/",
         courseCatalogSelector:
           "section.elementor-section[data-id='4c79b726'] .program-card-container",
       },
@@ -59,7 +59,7 @@ test.describe("Program Navigation", () => {
         name: "Technology Programs",
         linkSelector:
           "a[href='/programs/technology/'] h3:has-text('Technology Programs')",
-        expectedURL: "https://stage.onlinedegrees.nku.edu/programs/technology/",
+        expectedURL: "https://onlinedegrees.nku.edu/programs/technology/",
         courseCatalogSelector:
           "section.elementor-section[data-id='5a53ab69'] .program-card-container",
       },
@@ -68,14 +68,14 @@ test.describe("Program Navigation", () => {
         linkSelector:
           "a[href='/programs/undergraduate/'] h3:has-text('Undergraduate Programs')",
         expectedURL:
-          "https://stage.onlinedegrees.nku.edu/programs/undergraduate/",
+          "https://onlinedegrees.nku.edu/programs/undergraduate/",
         courseCatalogSelector:
           "section.elementor-section[data-id='7022c8c8'] .program-card-container",
       },
     ];
 
     // Navigate to the homepage
-    await page.goto("https://stage.onlinedegrees.nku.edu/");
+    await page.goto("https://onlinedegrees.nku.edu/");
 
     // Iterate through each program link and verify navigation and course catalog
     for (const program of programLinks) {
@@ -123,28 +123,30 @@ test.describe("Program Navigation", () => {
   });
 
  // Test to verify the Request Information form in the footer
-test("Verify the Request Information form loads correctly at the footer", async ({ page }) => {
+ test("Verify the Request Information form loads correctly at the footer", async ({ page }) => {
   // Navigate to the homepage
-  await page.goto("https://stage.onlinedegrees.nku.edu/");
+  await page.goto("https://onlinedegrees.nku.edu/");
 
-  // Define the selector for the 'Request Info' button by its `data-id` attribute
+  // Define the selector for the 'Request Info' button
   const requestInfoButtonSelector = '[data-id="950e078"] button.request-info';
 
-  // Wait for the 'Request Info' button to be visible
-  await page.waitForSelector(requestInfoButtonSelector, { state: "visible" });
+  // Count the number of elements matched by the selector
+  const requestInfoButtons = await page.locator(requestInfoButtonSelector);
+  const buttonCount = await requestInfoButtons.count();
 
-  console.log("Clicking the 'Request Info' button...");
+  console.log(`Found ${buttonCount} 'Request Info' buttons.`);
 
-  // Get the bounding box of the button to ensure it's in view before clicking
-  const requestInfoButton = await page.locator(requestInfoButtonSelector);
-  const box = await requestInfoButton.boundingBox();
-  if (box) {
-    // Scroll to the position of the button
-    await page.mouse.wheel(0, box.y);
+  // Check if there are multiple matches
+  if (buttonCount > 1) {
+    console.log("Multiple 'Request Info' buttons found. Selecting the first one...");
+    const requestInfoButton = requestInfoButtons.nth(0); // Select the first button
+    await requestInfoButton.scrollIntoViewIfNeeded();
+    await requestInfoButton.click();
+  } else {
+    console.log("Unique 'Request Info' button found. Clicking it...");
+    await requestInfoButtons.scrollIntoViewIfNeeded();
+    await requestInfoButtons.click();
   }
-
-  // Click the 'Request Info' button
-  await requestInfoButton.click();
 
   // Define the selector for the dialog that contains the form
   const requestInfoDialogSelector = 'div.dialog-widget-content.dialog-lightbox-widget-content[role="dialog"]';

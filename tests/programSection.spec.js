@@ -5,9 +5,24 @@ test.describe("Programs Section", () => {
 
   // Before each test, navigate to the NKU online degrees homepage
   test.beforeEach(async ({ page }) => {
-    await page.goto("https://dev-risepoint-nku.pantheonsite.io/");
+    await page.goto("https://onlinedegrees.nku.edu/");
   });
 
+  // Helper function to expand and verify "Online Programs" is open
+  async function ensureOnlineProgramsExpanded(page) {
+    const onlineProgramsSelector = "#mega-menu-item-6111 > a";
+    const submenuSelector = "#mega-menu-item-6118"; // Selector within the "Online Programs" submenu
+
+    const isExpanded = await page.getAttribute(onlineProgramsSelector, "aria-expanded");
+    if (isExpanded === "false") {
+      console.log("Expanding 'Online Programs' menu...");
+      await page.click(onlineProgramsSelector);
+    }
+
+    // Wait for a selector within the submenu to confirm it is open
+    await page.waitForSelector(submenuSelector, { state: "visible" });
+  }
+  
   test("Verify program links are visible", async ({ page }) => {
     console.log("Step 1: Clicking on 'Online Programs' to expand the menu...");
     const onlineProgramsSelector = "#mega-menu-item-6111 > a";
@@ -154,7 +169,7 @@ test.describe("Programs Section", () => {
     await page.click(healthAdminLink);
     console.log("Verifying 'Health Administration' page...");
     await expect(page).toHaveURL(
-      "https://dev-risepoint-nku.pantheonsite.io/programs/healthcare/master-of-science-health-administration/"
+      "https://onlinedegrees.nku.edu/programs/healthcare/master-of-science-health-administration/"
     );
     await page.goBack();
     await page.click(onlineProgramsSelector);
@@ -166,7 +181,7 @@ test.describe("Programs Section", () => {
     await page.click(healthInformaticsLink);
     console.log("Verifying 'Health Informatics' page...");
     await expect(page).toHaveURL(
-      "https://dev-risepoint-nku.pantheonsite.io/programs/business/informatics/mshi/"
+      "https://onlinedegrees.nku.edu/programs/business/informatics/mshi/"
     );
     await page.goBack();
     await page.click(onlineProgramsSelector);
@@ -181,7 +196,7 @@ test.describe("Programs Section", () => {
    await page.click(businessAnalyticsInformaticsLink);
    console.log("Verifying 'Business Analytics Informatics' page...");
    await expect(page).toHaveURL(
-     "https://dev-risepoint-nku.pantheonsite.io/programs/business/informatics/mbi-business-analytics/"
+     "https://onlinedegrees.nku.edu/programs/business/informatics/mbi-business-analytics/"
    );
    await page.goBack();
    await page.click(onlineProgramsSelector);
@@ -193,7 +208,7 @@ test.describe("Programs Section", () => {
    await page.click(healthcareInformaticsLinkInformatics);
    console.log("Verifying 'Healthcare Informatics (Informatics)' page...");
    await expect(page).toHaveURL(
-     "https://dev-risepoint-nku.pantheonsite.io/programs/business/informatics/mbi-healthcare/"
+     "https://onlinedegrees.nku.edu/programs/business/informatics/mbi-healthcare/"
    );
    await page.goBack();
    await page.click(onlineProgramsSelector);
@@ -208,7 +223,7 @@ const legalStudiesLink = "#mega-menu-item-6173 > a";
 await page.click(legalStudiesLink);
 console.log("Verifying 'Legal Studies' page...");
 await expect(page).toHaveURL(
-  "https://dev-risepoint-nku.pantheonsite.io/programs/business/master-legal-studies-digital-law-and-technology/"
+  "https://onlinedegrees.nku.edu/programs/business/master-legal-studies-digital-law-and-technology/"
 );
 await page.goBack();
 await page.click(onlineProgramsSelector);
@@ -223,7 +238,7 @@ await page.click("#mega-menu-item-6143 > a"); // Re-click Graduate Programs to e
   await page.click(nursingCareLink);
   console.log("Verifying 'Nursing Care' page...");
   await expect(page).toHaveURL(
-    "https://dev-risepoint-nku.pantheonsite.io/programs/healthcare/msn/agacnp/"
+    "https://onlinedegrees.nku.edu/programs/healthcare/msn/agacnp/"
   );
   await page.goBack();
   await page.click(onlineProgramsSelector);
@@ -235,7 +250,7 @@ await page.click("#mega-menu-item-6143 > a"); // Re-click Graduate Programs to e
   await page.click(familyNursePractitionerLink);
   console.log("Verifying 'Family Nurse Practitioner' page...");
   await expect(page).toHaveURL(
-    "https://dev-risepoint-nku.pantheonsite.io/programs/healthcare/msn/fnp/"
+    "https://onlinedegrees.nku.edu/programs/healthcare/msn/fnp/"
   );
   await page.goBack();
   await page.click(onlineProgramsSelector);
@@ -251,7 +266,7 @@ await page.click("#mega-menu-item-6143 > a"); // Re-click Graduate Programs to e
     await page.click(cybersecurityLink);
     console.log("Verifying 'Cybersecurity' page...");
     await expect(page).toHaveURL(
-      "https://dev-risepoint-nku.pantheonsite.io/programs/technology/ms-cybersecurity/"
+      "https://onlinedegrees.nku.edu/programs/technology/ms-cybersecurity/"
     );
     await page.goBack();
     await page.click(onlineProgramsSelector);
@@ -278,7 +293,7 @@ await page.click("#mega-menu-item-6143 > a"); // Re-click Graduate Programs to e
     await page.click(doctorEducationLink);
     console.log("Verifying 'Doctor of Education' page URL...");
     await expect(page).toHaveURL(
-      "https://dev-risepoint-nku.pantheonsite.io/programs/education/edd-educational-leadership/"
+      "https://onlinedegrees.nku.edu/programs/education/edd-educational-leadership/"
     );
     await page.goBack();
 
@@ -302,7 +317,7 @@ await page.click("#mega-menu-item-6143 > a"); // Re-click Graduate Programs to e
       "Verifying 'Post-Master’s Doctor of Nursing Practice' page URL..."
     );
     await expect(page).toHaveURL(
-      "https://dev-risepoint-nku.pantheonsite.io/programs/healthcare/post-masters-dnp/"
+      "https://onlinedegrees.nku.edu/programs/healthcare/post-masters-dnp/"
     );
     await page.goBack();
 
@@ -331,7 +346,7 @@ await page.click("#mega-menu-item-6143 > a"); // Re-click Graduate Programs to e
     await page.click(businessAnalyticsCertLink);
     console.log("Verifying 'Business Analytics Certificate' page URL...");
     await expect(page).toHaveURL(
-      "https://dev-risepoint-nku.pantheonsite.io/programs/business/informatics/graduate-analytics-certificate/"
+      "https://onlinedegrees.nku.edu/programs/business/informatics/graduate-analytics-certificate/"
     );
     await page.goBack();
 
@@ -357,7 +372,7 @@ await page.click("#mega-menu-item-6143 > a"); // Re-click Graduate Programs to e
       "Verifying 'Cybersecurity: Fundamentals in the Cloud Certificate' page URL..."
     );
     await expect(page).toHaveURL(
-      "https://dev-risepoint-nku.pantheonsite.io/programs/technology/cybersecurity-fundamentals-in-cloud-certificate/"
+      "https://onlinedegrees.nku.edu/programs/technology/cybersecurity-fundamentals-in-cloud-certificate/"
     );
     await page.goBack();
 
@@ -399,7 +414,7 @@ await page.click("#mega-menu-item-6143 > a"); // Re-click Graduate Programs to e
       "Verifying 'Health Care Commercialization Certificate' page URL..."
     );
     await expect(page).toHaveURL(
-      "https://dev-risepoint-nku.pantheonsite.io/programs/healthcare/commercialization-certificate/"
+      "https://onlinedegrees.nku.edu/programs/healthcare/commercialization-certificate/"
     );
     await page.goBack();
 
@@ -423,7 +438,7 @@ await page.click("#mega-menu-item-6143 > a"); // Re-click Graduate Programs to e
       "Verifying 'Informatics Business Analytics Certificate' page URL..."
     );
     await expect(page).toHaveURL(
-      "https://dev-risepoint-nku.pantheonsite.io/programs/business/informatics/graduate-analytics-certificate/"
+      "https://onlinedegrees.nku.edu/programs/business/informatics/graduate-analytics-certificate/"
     );
     await page.goBack();
 
@@ -447,7 +462,7 @@ await page.click("#mega-menu-item-6143 > a"); // Re-click Graduate Programs to e
       "Verifying 'Nurse Practitioner to Psych-Mental Health Nurse Practitioner Certificate' page URL..."
     );
     await expect(page).toHaveURL(
-      "https://dev-risepoint-nku.pantheonsite.io/programs/healthcare/nursing-certificates/np-to-pmhnp/"
+      "https://onlinedegrees.nku.edu/programs/healthcare/nursing-certificates/np-to-pmhnp/"
     );
     await page.goBack();
 

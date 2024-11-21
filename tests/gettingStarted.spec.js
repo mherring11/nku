@@ -5,7 +5,7 @@ test.describe("Programs Section", () => {
 
   // Before each test, navigate to the NKU online degrees homepage
   test.beforeEach(async ({ page }) => {
-    await page.goto("https://stage.onlinedegrees.nku.edu/");
+    await page.goto("https://onlinedegrees.nku.edu/");
   });
 
   // Helper function to expand the 'Getting Started' section if not expanded
@@ -39,7 +39,7 @@ test.describe("Programs Section", () => {
     await page.click(admissionsLink);
     console.log("Verifying 'Admissions' page URL...");
     await expect(page).toHaveURL(
-      "https://stage.onlinedegrees.nku.edu/admissions/"
+      "https://onlinedegrees.nku.edu/admissions/"
     );
     console.log("Navigation to 'Admissions' page verified successfully.");
 
@@ -66,7 +66,7 @@ test.describe("Programs Section", () => {
     await page.click(tuitionLink);
     console.log("Verifying 'Tuition' page URL...");
     await expect(page).toHaveURL(
-      "https://stage.onlinedegrees.nku.edu/tuition/"
+      "https://onlinedegrees.nku.edu/tuition/"
     );
     console.log("Navigation to 'Tuition' page verified successfully.");
     // Go back and re-expand 'Getting Started' section if needed
@@ -92,7 +92,7 @@ test.describe("Programs Section", () => {
     await page.click(calendarLink);
     console.log("Verifying 'Calendar' page URL...");
     await expect(page).toHaveURL(
-      "https://stage.onlinedegrees.nku.edu/calendar/"
+      "https://onlinedegrees.nku.edu/calendar/"
     );
     console.log("Navigation to 'Calendar' page verified successfully.");
   });

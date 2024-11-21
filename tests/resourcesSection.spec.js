@@ -5,7 +5,7 @@ test.describe("Resources Section", () => {
 
   // Before each test, navigate to the NKU online degrees homepage
   test.beforeEach(async ({ page }) => {
-    await page.goto("https://dev-risepoint-nku.pantheonsite.io/");
+    await page.goto("https://onlinedegrees.nku.edu/");
   });
 
   test("Verify Resources section links navigate correctly", async ({
@@ -21,7 +21,7 @@ test.describe("Resources Section", () => {
     const aboutLink = "#mega-menu-item-6236 > a";
     await page.click(aboutLink);
     console.log("Verifying 'About' page URL...");
-    await expect(page).toHaveURL("https://dev-risepoint-nku.pantheonsite.io/about/");
+    await expect(page).toHaveURL("https://onlinedegrees.nku.edu/about/");
     await page.goBack();
     await page.click(resourcesSelector); // Re-click Resources to expand again
 
@@ -31,7 +31,7 @@ test.describe("Resources Section", () => {
     await page.click(accreditationsLink);
     console.log("Verifying 'Accreditations & Accolades' page URL...");
     await expect(page).toHaveURL(
-      "https://dev-risepoint-nku.pantheonsite.io/accreditations-accolades/"
+      "https://onlinedegrees.nku.edu/accreditations-accolades/"
     );
     await page.goBack();
     await page.click(resourcesSelector); // Re-click Resources to expand again
@@ -42,7 +42,7 @@ test.describe("Resources Section", () => {
     await page.click(financialAidLink);
     console.log("Verifying 'Financial Aid' page URL...");
     await expect(page).toHaveURL(
-      "https://dev-risepoint-nku.pantheonsite.io/financial-aid/"
+      "https://onlinedegrees.nku.edu/financial-aid/"
     );
 
     // Step 5: Test 'Contact our staff' link by looking for its text
@@ -81,7 +81,7 @@ test.describe("Resources Section", () => {
     const militaryLink = "#mega-menu-item-6240 > a";
     await page.click(militaryLink);
     console.log("Verifying 'Military & Veterans Resources' page URL...");
-    await expect(page).toHaveURL("https://dev-risepoint-nku.pantheonsite.io/military/");
+    await expect(page).toHaveURL("https://onlinedegrees.nku.edu/military/");
     await page.goBack();
     await page.click(resourcesSelector); // Re-click Resources to expand again
 
@@ -91,7 +91,7 @@ test.describe("Resources Section", () => {
     await page.click(studentServicesLink);
     console.log("Verifying 'Student Services' page URL...");
     await expect(page).toHaveURL(
-      "https://dev-risepoint-nku.pantheonsite.io/student-services/"
+      "https://onlinedegrees.nku.edu/student-services/"
     );
     await page.goBack();
     await page.click(resourcesSelector); // Re-click Resources to expand again
@@ -101,7 +101,7 @@ test.describe("Resources Section", () => {
     const articlesLink = "#mega-menu-item-9136 > a";
     await page.click(articlesLink);
     console.log("Verifying 'Articles' page URL...");
-    await expect(page).toHaveURL("https://dev-risepoint-nku.pantheonsite.io/articles/");
+    await expect(page).toHaveURL("https://onlinedegrees.nku.edu/articles/");
     await page.goBack();
     await page.click(resourcesSelector); // Re-click Resources to expand again
 
@@ -111,8 +111,8 @@ test.describe("Resources Section", () => {
     await page.click(faqsLink);
 
     // Wait for the correct navigation to complete
-    await page.waitForURL("https://dev-risepoint-nku.pantheonsite.io/faqs/", { timeout: 10000 });
-    await expect(page).toHaveURL("https://dev-risepoint-nku.pantheonsite.io/faqs/");
+    await page.waitForURL("https://onlinedegrees.nku.edu/faqs/", { timeout: 10000 });
+    await expect(page).toHaveURL("https://onlinedegrees.nku.edu/faqs/");
     await page.goBack();
     await page.click(resourcesSelector); // Re-click Resources to expand again
 
@@ -122,8 +122,8 @@ test.describe("Resources Section", () => {
     await page.click(facultyLink);
 
     // Wait for the correct navigation to complete
-    await page.waitForURL("https://dev-risepoint-nku.pantheonsite.io/faculty/", { timeout: 10000 });
-    await expect(page).toHaveURL("https://dev-risepoint-nku.pantheonsite.io/faculty/");
+    await page.waitForURL("https://onlinedegrees.nku.edu/faculty/", { timeout: 10000 });
+    await expect(page).toHaveURL("https://onlinedegrees.nku.edu/faculty/");
     await page.goBack();
   });
 });
